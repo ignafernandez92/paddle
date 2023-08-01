@@ -32,9 +32,3 @@ connection.on('connect', () => {
 
 const nacho = 1 + 2
 
-/*testing nuevo*/
-const app = express();
-const port = 3306;
-app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
-})
