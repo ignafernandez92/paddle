@@ -2,17 +2,13 @@
 
 const express = require('express');
 const app = express();
-const PORT = 3000;
+const morgan = require('morgan');
 
 // Middleware para permitir el uso de JSON en las solicitudes
 app.use(express.json());
-
+app.use(morgan('dev'));
 // Agregar aquí las rutas
 
-// Iniciar el servidor
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
-});
 
 
 // Importar las rutas de los diferentes módulos
@@ -28,3 +24,6 @@ app.use('/tournaments', tournamentRoutes);
 app.use('/matches', matchRoutes);
 app.use('/players', playerRoutes);
 app.use('/courts', courtRoutes);
+
+
+module.exports = app;

@@ -3,7 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql2');
-require('dotenv').config();
+const connection = require('../db'); // Import the connection object
+
 
 // Ruta: GET /players
 router.get('/', (req, res) => {
@@ -24,36 +25,30 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   try {
     // Obtener los datos del nuevo jugador desde el cuerpo de la solicitud
-    const { nombre, documento, categoria, pareja } = req.body;
+    const { f_name, l_name, email, password, dni } = req.body;
 
-    // Configurar la conexión a la base de datos utilizando las variables de entorno
-    const connection = mysql.createConnection({
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE
-    });
-
-    // Abrir la conexión a la base de datos
-    connection.connect();
+    // Check if all required fields are present in the request body
+    if (!f_name || !l_name || !email || !password || !dni) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
 
     // Insertar el nuevo jugador en la base de datos
-    const query = `INSERT INTO players (nombre, documento, categoria, pareja) VALUES (?, ?, ?, ?)`;
-    const values = [nombre, documento, categoria, pareja];
+    const query = `INSERT INTO users (f_name, l_name, email, password, dni) VALUES (?, ?, ?, ?, ?)`;
+    const values = [f_name, l_name, email, password, dni];
     connection.query(query, values, (error, results) => {
       if (error) {
-        res.status(400).json({ message: 'Error al registrar el jugador', error });
+        console.error('Error inserting new player:', error);
+        return res.status(500).json({ message: 'Error al registrar el jugador', error });
       } else {
-        res.status(201).json({ message: 'Jugador creado correctamente', player: { id: results.insertId, nombre, documento, categoria, pareja } });
+        res.status(201).json({ message: 'Jugador creado correctamente', player: { id: results.insertId, f_name, l_name, dni } });
       }
     });
-
-    // Cerrar la conexión a la base de datos
-    connection.end();
   } catch (error) {
-    res.status(400).json({ message: 'Error al registrar el jugador', error });
+    console.error('Error while processing request:', error);
+    res.status(500).json({ message: 'Error al procesar la solicitud', error });
   }
 });
+
 
 // Ruta: PUT /players/:id
 router.put('/:id', (req, res) => {

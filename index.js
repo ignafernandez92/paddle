@@ -1,9 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./db');
+const app = require('./app');
 
-// Import the club_admin routes
-const clubAdminRoutes = require('./club_admin');
-// Mount the club_admin routes at the desired path
-app.use('/club_admin', clubAdminRoutes);
-app.use('/playerRoutes', playerRoutes);
+
+const PORT = 8080;
+
+// Iniciar el servidor
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
+});
