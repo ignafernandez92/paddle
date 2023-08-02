@@ -1,11 +1,42 @@
+// routes/courtRoutes.js
+
 const express = require('express');
 const router = express.Router();
+const mysql = require('mysql2');
+require('dotenv').config();
 
 // Ruta: GET /courts
 router.get('/', (req, res) => {
-  // Lógica para obtener la lista de canchas desde la base de datos o almacenamiento
-  // y enviarla como respuesta en formato JSON
-  res.json({ message: 'Lista de canchas' });
+  try {
+    // Obtener el ID del club desde la consulta de parámetros (query string)
+    const clubId = req.query.clubId;
+
+    // Configurar la conexión a la base de datos utilizando las variables de entorno
+    const connection = mysql.createConnection({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE
+    });
+
+    // Abrir la conexión a la base de datos
+    connection.connect();
+
+    // Obtener la lista de canchas del club desde la base de datos
+    const query = `SELECT * FROM courts WHERE clubId = ?`;
+    connection.query(query, [clubId], (error, results) => {
+      if (error) {
+        res.status(400).json({ message: 'Error al obtener la lista de canchas', error });
+      } else {
+        res.status(200).json({ message: 'Lista de canchas', courts: results });
+      }
+    });
+
+    // Cerrar la conexión a la base de datos
+    connection.end();
+  } catch (error) {
+    res.status(400).json({ message: 'Error al obtener la lista de canchas', error });
+  }
 });
 
 // Ruta: GET /courts/:id
