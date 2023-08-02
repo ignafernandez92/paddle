@@ -2,6 +2,8 @@
 
 const express = require('express');
 const router = express.Router();
+const mysql = require('mysql2');
+require('dotenv').config();
 
 // Ruta: GET /tournaments
 router.get('/', (req, res) => {
@@ -20,9 +22,48 @@ router.get('/:id', (req, res) => {
 
 // Ruta: POST /tournaments
 router.post('/', (req, res) => {
-  // Lógica para crear un nuevo torneo con los datos proporcionados en el cuerpo de la solicitud
-  // y enviar la respuesta con los detalles del torneo creado
-  res.json({ message: 'Torneo creado correctamente' });
+  try {
+    // Obtener los datos del nuevo torneo desde el cuerpo de la solicitud
+    const { 
+      nombreTorneo,
+      categorias,
+      genero,
+      fechaInicio,
+      fechaFin,
+      clubesParticipantes,
+      precioInscripcion,
+      descripcion,
+      premios,
+    } = req.body;
+
+    // Configurar la conexión a la base de datos utilizando las variables de entorno
+    const connection = mysql.createConnection({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE
+    });
+
+    // Abrir la conexión a la base de datos
+    connection.connect();
+
+    // Insertar el nuevo torneo en la base de datos
+    const query = `INSERT INTO tournaments (nombreTorneo, categorias, genero, fechaInicio, fechaFin, clubesParticipantes, precioInscripcion, descripcion, premios)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    const values = [nombreTorneo, categorias, genero, fechaInicio, fechaFin, clubesParticipantes, precioInscripcion, descripcion, premios];
+    connection.query(query, values, (error, results) => {
+      if (error) {
+        res.status(400).json({ message: 'Error al registrar el torneo', error });
+      } else {
+        res.status(201).json({ message: 'Torneo registrado correctamente', tournament: { id: results.insertId, nombreTorneo, categorias, genero, fechaInicio, fechaFin, clubesParticipantes, precioInscripcion, descripcion, premios } });
+      }
+    });
+
+    // Cerrar la conexión a la base de datos
+    connection.end();
+  } catch (error) {
+    res.status(400).json({ message: 'Error al registrar el torneo', error });
+  }
 });
 
 // Ruta: PUT /tournaments/:id
