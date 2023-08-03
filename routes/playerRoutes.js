@@ -25,22 +25,23 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   try {
     // Obtener los datos del nuevo jugador desde el cuerpo de la solicitud
-    const { f_name, l_name, email, password, dni } = req.body;
+    const { f_name, l_name, email, password, dni, date_of_birth, role } = req.body;
 
     // Check if all required fields are present in the request body
-    if (!f_name || !l_name || !email || !password || !dni) {
+    if (!f_name || !l_name || !email || !password || !dni || !date_of_birth || !role) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
-
+    const currentTimestamp = new Date().toISOString();
     // Insertar el nuevo jugador en la base de datos
-    const query = `INSERT INTO users (f_name, l_name, email, password, dni) VALUES (?, ?, ?, ?, ?)`;
-    const values = [f_name, l_name, email, password, dni];
+    const query = `INSERT INTO users (f_name, l_name, email, password, dni, date_of_birth, created_at, updated_at, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    const values = [f_name, l_name, email, password, dni, date_of_birth,currentTimestamp,currentTimestamp, role ];
+    console.log(req.body);
     connection.query(query, values, (error, results) => {
       if (error) {
         console.error('Error inserting new player:', error);
         return res.status(500).json({ message: 'Error al registrar el jugador', error });
       } else {
-        res.status(201).json({ message: 'Jugador creado correctamente', player: { id: results.insertId, f_name, l_name, dni } });
+        res.status(201).json({ message: 'Jugador creado correctamente', player: { id: results.insertId, f_name, l_name, date_of_birth, dni, role } });
       }
     });
   } catch (error) {

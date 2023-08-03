@@ -5,8 +5,10 @@ const app = express();
 const morgan = require('morgan');
 
 // Middleware para permitir el uso de JSON en las solicitudes
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(express.static('public'));
 // Agregar aquí las rutas
 
 
