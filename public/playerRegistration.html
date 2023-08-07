@@ -7,7 +7,7 @@
 </head>
 <body>
   <h1>Player Registration Form</h1>
-  <form action="http://localhost:8080/players" method="post"> <!-- Correct action attribute -->
+  <form id="playerForm" action="http://localhost:8080/players" method="post"> <!-- Correct action attribute -->
     <label for="f_name">First Name:</label>
     <input type="text" id="f_name" name="f_name" required><br>
 
@@ -34,5 +34,51 @@
 
     <input type="submit" value="Submit">
   </form>
+  
+  <!-- Success message -->
+  <div id="successMessage" style="display: none;">
+    Jugador cargado exitosamente
+  </div>
+
+  <script>
+    // Function to show the success message
+    function showSuccessMessage() {
+      document.getElementById('successMessage').style.display = 'block';
+    }
+
+    // Submit event listener for the form
+    document.getElementById('playerForm').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get form data
+      const formData = new FormData(document.getElementById('playerForm'));
+
+      // Convert form data to JSON object
+      const formObject = {};
+      formData.forEach((value, key) => {
+        formObject[key] = value;
+      });
+      const jsonData = JSON.stringify(formObject);
+
+      // Perform the form submission using JavaScript
+      fetch('http://localhost:8080/players', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: jsonData
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Show the success message and reload the form
+        showSuccessMessage();
+        document.getElementById('playerForm').reset();
+      })
+      .catch(error => {
+        console.error('Error while creating player:', error);
+        // Handle error here if needed
+      });
+    });
+  </script>
 </body>
 </html>

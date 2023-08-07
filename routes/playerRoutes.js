@@ -8,10 +8,24 @@ const connection = require('../db'); // Import the connection object
 
 // Ruta: GET /players
 router.get('/', (req, res) => {
-  // Lógica para obtener la lista de jugadores desde la base de datos o almacenamiento
-  // y enviarla como respuesta en formato JSON
-  res.json({ message: 'Lista de jugadores' });
+  try {
+    // Query the database to retrieve the list of players
+    const query = 'SELECT * FROM users where role =  "player"'; // Modify this query according to your table structure
+    connection.query(query, (error, results) => {
+      if (error) {
+        console.error('Error fetching players:', error);
+        return res.status(500).json({ message: 'Error fetching players', error });
+      }
+
+      // Send the list of players as a JSON response
+      res.json({ message: 'Lista de jugadores', players: results });
+    });
+  } catch (error) {
+    console.error('Error while processing request:', error);
+    res.status(500).json({ message: 'Error al procesar la solicitud', error });
+  }
 });
+
 
 // Ruta: GET /players/:id
 router.get('/:id', (req, res) => {
