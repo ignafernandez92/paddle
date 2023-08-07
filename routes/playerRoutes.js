@@ -29,11 +29,30 @@ router.get('/', (req, res) => {
 
 // Ruta: GET /players/:id
 router.get('/:id', (req, res) => {
-  // Lógica para obtener los detalles de un jugador específico por su ID desde la base de datos o almacenamiento
-  // y enviarlos como respuesta en formato JSON
-  const playerId = req.params.id;
-  res.json({ message: `Detalles del jugador con ID ${playerId}` });
+  try {
+    const playerId = req.params.id;
+
+    // Query the database to retrieve the details of the player with the specified ID
+    const query = 'SELECT * FROM users WHERE user_id = ?';
+    connection.query(query, [playerId], (error, results) => {
+      if (error) {
+        console.error('Error fetching player details:', error);
+        return res.status(500).json({ message: 'Error fetching player details', error });
+      }
+
+      if (results.length === 0) {
+        return res.status(404).json({ message: 'Player not found' });
+      }
+
+      // Send the player details as a JSON response
+      res.json({ message: 'Player details', player: results[0] });
+    });
+  } catch (error) {
+    console.error('Error while processing request:', error);
+    res.status(500).json({ message: 'Error al procesar la solicitud', error });
+  }
 });
+
 
 // Ruta: POST /players
 router.post('/', (req, res) => {
@@ -67,18 +86,62 @@ router.post('/', (req, res) => {
 
 // Ruta: PUT /players/:id
 router.put('/:id', (req, res) => {
-  // Lógica para actualizar los detalles de un jugador específico por su ID con los datos proporcionados en el cuerpo de la solicitud
-  // y enviar la respuesta con los detalles actualizados
-  const playerId = req.params.id;
-  res.json({ message: `Jugador con ID ${playerId} actualizado correctamente` });
+  try {
+    const playerId = req.params.id;
+    const { f_name, l_name, email, password, dni, date_of_birth, role } = req.body;
+
+    // Check if all required fields are present in the request body
+    if (!f_name || !l_name || !email || !password || !dni || !date_of_birth || !role) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    // Update the player's details in the database, including updated_at
+    const query = `
+      UPDATE users
+      SET f_name = ?, l_name = ?, email = ?, password = ?, dni = ?, date_of_birth = ?, role = ?, updated_at = NOW()
+      WHERE user_id = ?
+    `;
+    const values = [f_name, l_name, email, password, dni, date_of_birth, role, playerId];
+    
+    connection.query(query, values, (error, results) => {
+      if (error) {
+        console.error('Error updating player:', error);
+        return res.status(500).json({ message: 'Error updating player', error });
+      }
+      
+      res.json({ message: `Jugador con ID ${playerId} actualizado correctamente` });
+    });
+  } catch (error) {
+    console.error('Error while processing request:', error);
+    res.status(500).json({ message: 'Error al procesar la solicitud', error });
+  }
 });
+
 
 // Ruta: DELETE /players/:id
 router.delete('/:id', (req, res) => {
-  // Lógica para eliminar un jugador específico por su ID desde la base de datos o almacenamiento
-  // y enviar la respuesta con un mensaje de éxito
-  const playerId = req.params.id;
-  res.json({ message: `Jugador con ID ${playerId} eliminado correctamente` });
+  try {
+    const playerId = req.params.id;
+
+    // Query the database to delete the player with the specified ID
+    const query = 'DELETE FROM users WHERE user_id = ?';
+    connection.query(query, [playerId], (error, results) => {
+      if (error) {
+        console.error('Error deleting player:', error);
+        return res.status(500).json({ message: 'Error deleting player', error });
+      }
+
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ message: 'Player not found' });
+      }
+
+      // Send a success response
+      res.json({ message: 'Player deleted successfully' });
+    });
+  } catch (error) {
+    console.error('Error while processing request:', error);
+    res.status(500).json({ message: 'Error al procesar la solicitud', error });
+  }
 });
 
 module.exports = router;
