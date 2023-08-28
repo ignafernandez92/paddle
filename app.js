@@ -33,6 +33,7 @@ const matchRoutes = require('./routes/matchRoutes');
 const playerRoutes = require('./routes/playerRoutes');
 const courtRoutes = require('./routes/courtRoutes');
 const RegisterRoutes = require('./routes/register');
+const login = require('./routes/login');
 
 // Middleware para usar las rutas de los diferentes módulos
 app.use('/tournaments', tournamentRoutes);
@@ -40,5 +41,7 @@ app.use('/matches', matchRoutes);
 app.use('/players', playerRoutes);
 app.use('/courts', courtRoutes);
 app.use('/register', RegisterRoutes);
+app.use('/login', login);
+
 
 module.exports = app;

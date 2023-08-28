@@ -12,4 +12,7 @@ export class ApiService {
   registerUser(userData: any): Observable<any> {
     return this.http.post('http://localhost:8080/players', userData);
   }
+  loginUser(userData: any): Observable<any> {
+    return this.http.post('http://localhost:8080/login', userData);
+  }
 }
