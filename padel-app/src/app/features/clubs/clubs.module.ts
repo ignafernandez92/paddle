@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClubsPageComponent } from './pages/clubs-page/clubs-page.component';
+import { ClubsRoutingModule } from './clubs-routing.module';
+import { SharedModule } from 'app/shared/shared.module';
 
 
 
@@ -9,7 +11,9 @@ import { ClubsPageComponent } from './pages/clubs-page/clubs-page.component';
     ClubsPageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ClubsRoutingModule,
+    SharedModule,
   ]
 })
 export class ClubsModule { }
