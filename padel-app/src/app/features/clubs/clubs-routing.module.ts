@@ -9,7 +9,7 @@ const routes: Routes = [{
 {
     path: 'clubs/:id',
     component: ClubsPageComponent
-},
+}, 
 {
     path: '**',
     component: ClubsPageComponent

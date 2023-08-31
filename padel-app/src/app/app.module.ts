@@ -28,9 +28,6 @@ import { TournamentsModule } from './features/tournaments/tournaments.module';
     ReactiveFormsModule,
     HttpClientModule,
     CoreModule
-    ClubsModule
-    ParticipantsModule
-    TournamentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
