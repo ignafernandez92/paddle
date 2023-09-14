@@ -9,9 +9,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
-import { ClubsModule } from './features/clubs/clubs.module';
-import { ParticipantsModule } from './features/participants/participants.module';
-import { TournamentsModule } from './features/tournaments/tournaments.module';
+import { HeaderComponent } from './header/header.component';
+import { TournamentComponent } from './tournament/tournament.component';
+import { TournamentListComponent } from './tournament/tournament-list/tournament-list.component';
+import { TournamentDetailComponent } from './tournament/tournament-detail/tournament-detail.component';
+import { TournamentItemComponent } from './tournament/tournament-list/tournament-item/tournament-item.component';
+import { UserClubComponent } from './user-club/user-club.component';
+import { CourtsComponent } from './user-club/courts/courts.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,14 @@ import { TournamentsModule } from './features/tournaments/tournaments.module';
     LoginComponent,
     DashboardComponent,
     RegistrationComponent,
-    
+    HeaderComponent,
+    TournamentComponent,
+    TournamentListComponent,
+    TournamentDetailComponent,
+    TournamentItemComponent,
+    UserClubComponent,
+    CourtsComponent,
+   
   ],
   imports: [
     BrowserModule,
