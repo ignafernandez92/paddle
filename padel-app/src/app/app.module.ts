@@ -13,9 +13,9 @@ import { HeaderComponent } from './header/header.component';
 import { TournamentComponent } from './tournament/tournament.component';
 import { TournamentListComponent } from './tournament/tournament-list/tournament-list.component';
 import { TournamentDetailComponent } from './tournament/tournament-detail/tournament-detail.component';
-import { TournamentItemComponent } from './tournament/tournament-list/tournament-item/tournament-item.component';
 import { UserClubComponent } from './user-club/user-club.component';
 import { CourtsComponent } from './user-club/courts/courts.component';
+import { TournamentZonesComponent } from './tournament/tournament-list/tournament-zones/tournament-zones.component';
 
 @NgModule({
   declarations: [
@@ -27,9 +27,11 @@ import { CourtsComponent } from './user-club/courts/courts.component';
     TournamentComponent,
     TournamentListComponent,
     TournamentDetailComponent,
-    TournamentItemComponent,
     UserClubComponent,
     CourtsComponent,
+    TournamentZonesComponent,
+  
+   
    
   ],
   imports: [
