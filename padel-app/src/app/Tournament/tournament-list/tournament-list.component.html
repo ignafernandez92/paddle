@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-xs-12">
+        <button class="btn btn-success">Nuevo Torneo</button> <!-- Cambiado a "Nuevo Torneo" para que coincida con el idioma en español -->
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-xs-12">
+        <app-tournament-item
+            *ngFor="let tournamentEl of tournaments"
+            [tournament]="tournamentEl" >
+        </app-tournament-item>
+    </div>
+</div>

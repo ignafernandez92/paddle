@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'padel-app';
+  loadedFeature = 'tournament'
+
+  onNavigate(feature: string) {
+    this.loadedFeature = feature;
+
+  }
 }
