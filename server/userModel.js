@@ -1,6 +1,5 @@
 const mysql = require('mysql2');
-
-// Create a MySQL connection pool
+ç
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -15,9 +14,9 @@ const createUser = async (user) => {
     try {
       const currentTimestamp = new Date().toISOString();
   
-      const query = `INSERT INTO users (f_name, l_name, email, password, dni, date_of_birth, created_at, updated_at, role)
-                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-      const values = [user.f_name, user.l_name, user.email, user.password, user.dni, user.date_of_birth, currentTimestamp, currentTimestamp, user.role];
+      const query = `INSERT INTO users (f_name, l_name, username, email, password, dni, date_of_birth, created_at, updated_at, role)
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+      const values = [user.f_name, user.l_name, user.username, user.email, user.password, user.dni, user.date_of_birth, currentTimestamp, currentTimestamp, user.role];
   
       const [result] = await pool.promise().query(query, values);
   

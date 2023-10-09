@@ -1,4 +1,4 @@
-// app.js
+
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
@@ -9,36 +9,45 @@ const app = express();
 const secretKey = process.env.SECRET_KEY_USER;
 
 
-// Middleware para permitir el uso de JSON en las solicitudes
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(morgan('dev'));
-app.use(express.static('public'));
-app.use(cors());
 app.use(session({
-  secret: secretKey,
+  secret: 'padel14789632',
   resave: false,
   saveUninitialized: false,
 }));
+
+app.use(morgan('combined')); 
+app.use(cors({
+  origin: 'http://localhost:4200',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true, 
+}));
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+app.options('*', cors());
+app.use(morgan('dev'));
+app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-// Importar las rutas de los diferentes módulos
 const tournamentRoutes = require('./routes/tournamentRoutes');
 const matchRoutes = require('./routes/matchRoutes');
 const playerRoutes = require('./routes/playerRoutes');
 const courtRoutes = require('./routes/courtRoutes');
 const RegisterRoutes = require('./routes/register');
 const login = require('./routes/login');
+const forgotPasswordRoutes = require('./routes/forgot-password');
 
-// Middleware para usar las rutas de los diferentes módulos
 app.use('/login', login);
 app.use('/tournaments', tournamentRoutes);
 app.use('/matches', matchRoutes);
 app.use('/players', playerRoutes);
 app.use('/courts', courtRoutes);
 app.use('/register', RegisterRoutes);
+app.use('/password-reset', forgotPasswordRoutes);
 
 
 
