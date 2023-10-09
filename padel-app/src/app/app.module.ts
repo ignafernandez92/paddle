@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-
-=======
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,8 +11,12 @@ import { RegistrationComponent } from './registration/registration.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-
-
+import { HeaderComponent } from './header/header.component';
+import { TournamentComponent } from './Tournament/tournament.component';
+import { UserClubComponent } from './user-club/user-club.component';
+import { TournamentListComponent } from './Tournament/tournament-list/tournament-list.component';
+import { TournamentDetailComponent } from './Tournament/tournament-detail/tournament-detail.component';
+import { TournamentItemComponent } from './Tournament/tournament-list/tournament - item/tournament-item.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +25,12 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     RegistrationComponent,
     ResetPasswordComponent,
     ForgotPasswordComponent,
+    HeaderComponent,
+    TournamentComponent,
+    UserClubComponent,
+    TournamentListComponent,
+    TournamentDetailComponent,
+    TournamentItemComponent,
     
   ],
   imports: [
@@ -37,4 +44,3 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
   bootstrap: [AppComponent]
 })
 export class AppModule { }
->>>>>>> main
