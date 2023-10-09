@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import jwt_decode from 'jwt-decode';
 import { environment } from '../environments/environments'; 
@@ -6,7 +7,7 @@ import { environment } from '../environments/environments';
   providedIn: 'root'
 })
 export class AuthService {
-  private secretKey = environment.SECRET_KEY_USER ; // Replace with your actual secret key
+  private secretKey = environment.SECRET_KEY_USER;
 
   verifyToken(token: string): any {
     try {
@@ -16,5 +17,14 @@ export class AuthService {
       console.error('Error decoding token:', error);
       return null;
     }
+  }
+  setToken(token: string): void {
+    localStorage.setItem('token', token);
+  }
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+  removeToken(): void {
+    localStorage.removeItem('token');
   }
 }

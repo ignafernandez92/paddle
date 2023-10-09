@@ -7,8 +7,11 @@ passport.use(new LocalStrategy((username, password, done) => {
   connection.query(query, [username], (err, user) => {
     if (err) return done(err);
     if (!user || user.length === 0) return done(null, false, { message: 'Incorrect username' });
-    if (user[0].password !== password) return done(null, false, { message: 'Incorrect password' });
-    return done(null, user[0]);
+    bcrypt.compare(password, user[0].password, (err, passwordMatches) => {
+      if (err) return done(err);
+      if (!passwordMatches) return done(null, false, { message: 'Incorrect password' });
+      return done(null, user[0]);
+    });
   });
 }));
 

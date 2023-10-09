@@ -2,15 +2,21 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt'); 
 const jwt = require('jsonwebtoken');
-const connection = require('../db'); 
+const connection = require('../db');
 
-const secretKey = process.env.SECRET_KEY_USER;
+// const secretKey = process.env.SECRET_KEY_USER;
 
 router.post('/', async (req, res) => {
   try {
+    console.log('Login route handler accessed');
+
     const { email, password } = req.body;
 
+    console.log('Received login request for email:', email);
+    console.log('Received login request with password:', password);
+
     const query = 'SELECT * FROM users WHERE email = ?';
+
     connection.query(query, [email], async (error, results) => {
       if (error) {
         console.error('Error fetching user:', error);
@@ -18,22 +24,22 @@ router.post('/', async (req, res) => {
       }
 
       if (results.length === 0) {
-        return res.status(401).json({ message: 'Invalid email or password' });
+        return res.status(401).json({ message: 'length dont match' });
       }
 
       const user = results[0];
-      console.log(user.email,user.password);
+      const hashedPasswordFromDB = user.password;
 
-      console.log('Received Plain-Text Password:', password);
-      console.log('Hashed Password from DB:', user.password);
-
-      const passwordMatches = await bcrypt.compare(password, user.password);
+      const passwordMatches = await bcrypt.compare(password, hashedPasswordFromDB); 
+      console.log('password:', password);
+      console.log('hashedPasswordFromDB:', hashedPasswordFromDB);
+      console.log('passwordMatches:', passwordMatches);
       if (!passwordMatches) {
-        return res.status(401).json({ message: 'ACA ESTA EL PROBLEMA' });
+        return res.status(401).json({ message: 'Invalid email or password' });
       }
 
-      const token = jwt.sign({ userId: user.user_id, role: user.role }, secretKey, {
-        expiresIn: '1h', 
+      const token = jwt.sign({ userId: user.user_id, role: user.role }, padel14789632, {
+        expiresIn: '1h',
       });
 
       if (!token) {
