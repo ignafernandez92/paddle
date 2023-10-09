@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+
+
+=======
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -33,3 +37,4 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+>>>>>>> main
