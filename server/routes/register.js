@@ -15,13 +15,11 @@ router.post('/', async (req, res) => {
   try {
     const { f_name, l_name, email, password, dni, date_of_birth, role, username } = req.body;
 
-    // Validation checks
     if (!f_name || !l_name || !email || !password || !dni || !date_of_birth || !role || !username) {
       console.log('Validation failed: Missing required fields');
       return res.status(422).json({ message: 'Missing required fields' });
     }
 
-    // More detailed validation (e.g., email format, date_of_birth format) can be added here
 
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
