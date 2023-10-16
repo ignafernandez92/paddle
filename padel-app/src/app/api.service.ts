@@ -32,8 +32,23 @@ export class ApiService {
       );
   }
  
+    getCourts(clubId: number): Observable<any> {
+      return this.http.get(`${this.baseUrlHttp}?clubId=${clubId}`);
+    }
+  
+    addCourt(courtData: any): Observable<any> {
+      return this.http.post(this.baseUrlHttp, courtData);
+    }
+  
+    updateCourt(courtId: number, courtData: any): Observable<any> {
+      return this.http.put(`${this.baseUrlHttp}/${courtId}`, courtData);
+    }
+  
+    deleteCourt(courtId: number): Observable<any> {
+      return this.http.delete(`${this.baseUrlHttp}/${courtId}`);
+    }
+  }
 
-}
 
 
   // private baseUrl = environment.apiUrl;
