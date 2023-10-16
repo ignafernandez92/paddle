@@ -8,7 +8,8 @@
     <div class="col-xs-12">
         <app-tournament-item
             *ngFor="let tournamentEl of tournaments"
-            [tournament]="tournamentEl" >
+            [tournament]="tournamentEl"
+            (tournamenteSelected)="onTournamentSelected(tournamentEl)">
         </app-tournament-item>
     </div>
 </div>

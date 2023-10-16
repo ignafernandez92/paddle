@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Tournament } from 'app/Tournament/tournament.model'; // Cambia 'tournament' a 'Tournament'
 
 @Component({
@@ -8,8 +8,12 @@ import { Tournament } from 'app/Tournament/tournament.model'; // Cambia 'tournam
 })
 export class TournamentItemComponent implements OnInit {
   @Input() tournament: Tournament | undefined; // Cambia 'tournaments' a 'tournament'
-
+  @Output() tournamenteSelected = new EventEmitter<void>();
   constructor() { }
 
   ngOnInit(): void { }
+
+  onSelected() {
+    this.tournamenteSelected.emit(); 
+  }
 }
