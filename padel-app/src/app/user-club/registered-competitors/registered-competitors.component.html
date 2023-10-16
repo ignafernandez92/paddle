@@ -1,1 +1,15 @@
 <p>registered-competitors works!</p>
+
+<!-- registered-competitors.component.html -->
+<div class="row">
+    <div class="col-xs-10"></div>
+    <hr>
+    <ul class="list-group">
+      <a class="list-group-item"
+         style="cursor: pointer"
+         *ngFor="let competitor of competitors">
+        {{ competitor.name }} ({{ competitor.dni }})
+      </a>
+    </ul>
+  </div>
+  
