@@ -9,7 +9,8 @@ import { ResetPasswordService } from '../reset-password.service';
 export class ForgotPasswordComponent {
   email: string = '';
 
-  constructor(private resetPasswordService: ResetPasswordService) {}
+  constructor(private resetPasswordService: ResetPasswordService) {    console.log('ForgotPasswordComponent constructed');
+}
 
   sendResetEmail() {
     if (!this.email) {

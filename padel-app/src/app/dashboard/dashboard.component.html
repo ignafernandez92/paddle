@@ -1,1 +1,10 @@
-<p>dashboard works!</p>
+<app-header (featureSelected)="onNavigate($event)"></app-header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12"> 
+           <app-tournament *ngIf="loadedFeature === 'tournament'"></app-tournament>
+           <hr>
+           <app-user-club *ngIf="loadedFeature !== 'tournament'"></app-user-club>         
+        </div>
+    </div>
+</div>

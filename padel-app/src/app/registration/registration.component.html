@@ -1,4 +1,5 @@
 <h2>Registration</h2>
+
 <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
   <label for="f_name">First Name:</label>
   <input type="text" id="f_name" name="f_name" formControlName="f_name" required><br>
@@ -28,4 +29,34 @@
   </select><br>
 
   <button type="submit">Register</button>
+  <div class="warning-message"  *ngIf="registrationStatus === 'success'" class="success-message">
+    {{ registrationMessage }}
+  </div>
+  <div class="warning-message"  *ngIf="registrationStatus === 'error'" class="error-message">
+    {{ registrationMessage }}
+  </div>
+  <div class="warning-message"  *ngIf="registrationForm.get('f_name')?.touched && registrationForm.get('f_name')?.invalid" class="warning-message">
+    First Name is required.
+  </div>
+  <div class="warning-message"  *ngIf="registrationForm.get('l_name')?.touched && registrationForm.get('l_name')?.invalid" class="warning-message">
+    Last Name is required.
+  </div>
+  <div class="warning-message"  *ngIf="registrationForm.get('username')?.touched && registrationForm.get('username')?.invalid" class="warning-message">
+    Username is required.
+  </div>
+  <div class="warning-message" *ngIf="registrationForm.get('email')?.touched && registrationForm.get('email')?.invalid" class="warning-message">
+    Email is required and must be a valid email.
+  </div>
+  <div class="warning-message"  *ngIf="registrationForm.get('password')?.touched && registrationForm.get('password')?.invalid" class="warning-message">
+    Password is required.
+  </div>
+  <div class="warning-message"  *ngIf="registrationForm.get('dni')?.touched && registrationForm.get('dni')?.invalid" class="warning-message">
+    DNI is required.
+  </div>
+  <div class="warning-message"  *ngIf="registrationForm.get('date_of_birth')?.touched && registrationForm.get('date_of_birth')?.invalid" class="warning-message">
+    Date of Birth is required.
+  </div>
+  <div  class="warning-message" *ngIf="registrationForm.get('role')?.touched && registrationForm.get('role')?.invalid" class="warning-message">
+    Role is required.
+  </div>
 </form>

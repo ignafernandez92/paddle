@@ -5,10 +5,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.sass'],
+  styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
+  registrationStatus: 'success' | 'error' | null = null;
+  registrationMessage: string = '';
 
   constructor(private apiService: ApiService, private fb: FormBuilder) {
     this.registrationForm = this.fb.group({
@@ -31,12 +33,14 @@ export class RegistrationComponent implements OnInit {
 
       this.apiService.registerUser(userData).subscribe({
         next: (response) => {
-          console.log('User registered:', response);
-          // Handle successful registration, show a message, or redirect to login page
+          this.registrationStatus = 'success';
+          this.registrationMessage = 'User registered successfully!';
+          this.registrationForm.reset();
         },
         error: (error) => {
+          this.registrationStatus = 'error';
+          this.registrationMessage = 'Error registering user. Please try again.';
           console.error('Error registering user:', error);
-          // Handle error, show an error message, etc.
         },
       });
     }

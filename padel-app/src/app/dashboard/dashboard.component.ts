@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.sass']
 })
 export class DashboardComponent {
+  title = 'padel-app';
+  loadedFeature = 'tournament'
 
-}
+  onNavigate(feature: string) {
+    this.loadedFeature = feature;
+}}
