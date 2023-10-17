@@ -27,4 +27,19 @@ export class AuthService {
   removeToken(): void {
     localStorage.removeItem('token');
   }
+  isAuthenticated(): boolean {
+    
+    const token = this.getToken();
+
+    if (token) {
+      const decodedToken = this.verifyToken(token);
+
+      if (decodedToken) {
+        const currentTimestamp = Math.floor(Date.now() / 1000);
+        return decodedToken.exp > currentTimestamp;
+      }
+    }
+    console.log('AuthService - isAuthenticated');
+    return false;
+  }
 }

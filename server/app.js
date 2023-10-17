@@ -42,7 +42,7 @@ const login = require('./routes/login');
 const forgotPasswordRoutes = require('./routes/forgot-password');
 
 app.use('/login', login);
-app.use('/tournaments', tournamentRoutes);
+app.use('/tournament', tournamentRoutes);
 app.use('/matches', matchRoutes);
 app.use('/players', playerRoutes);
 app.use('/courts', courtRoutes);

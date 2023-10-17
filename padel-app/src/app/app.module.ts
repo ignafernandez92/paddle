@@ -1,5 +1,6 @@
 
 import { NgModule } from '@angular/core';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -45,7 +46,9 @@ import { CourtsComponent } from './user-club/courts/courts.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
