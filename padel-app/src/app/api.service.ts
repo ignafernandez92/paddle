@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environments';
 import { catchError } from 'rxjs/operators';
-
+import { Competitor } from 'app/shared/competitors.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -53,6 +53,9 @@ export class ApiService {
     }
     getPlayers(): Observable<any> {
       return this.http.get(`${this.baseUrlHttp}/players`);
+    }
+    deletePlayer(user_id: number): Observable<any> {
+      return this.http.delete(`${this.baseUrlHttp}/players/${user_id}`);
     }
 
   }

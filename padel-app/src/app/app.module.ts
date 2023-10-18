@@ -21,6 +21,8 @@ import { TournamentItemComponent } from './Tournament/tournament-list/tournament
 import { RegisteredCompetitorsComponent } from 'app/user-club/registered-competitors/registered-competitors.component'
 import { CourtsComponent } from './user-club/courts/courts.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatIconModule,
   ],
   providers: [
     { provide: LocationStrategy, useClass: PathLocationStrategy },

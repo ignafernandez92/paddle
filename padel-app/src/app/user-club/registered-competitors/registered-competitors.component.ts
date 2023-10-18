@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { Competitor } from 'app/shared/competitors.model';
 
-
-
 @Component({
   selector: 'app-registered-competitors',
   templateUrl: './registered-competitors.component.html',
@@ -37,7 +35,6 @@ export class RegisteredCompetitorsComponent implements OnInit {
     }
   }
 
-
   ngOnInit() {
     this.getPlayers();
   }
@@ -64,7 +61,8 @@ export class RegisteredCompetitorsComponent implements OnInit {
       next: (response) => {
         console.log('Players retrieved:', response);
         this.competitors = response.players.map((player: any) => {
-          return new Competitor(player.f_name, player.l_name, player.dni);
+          return new Competitor(player.user_id, player.f_name, player.l_name, player.dni);
+
         });
       },
       error: (error) => {
@@ -73,10 +71,28 @@ export class RegisteredCompetitorsComponent implements OnInit {
     });
   }
 
-  createPlayer() {
-  
-    const existingPlayer = this.competitors.find(player => player.dni === this.newPlayer.dni);
+  deletePlayer(competitor: Competitor) {
+    const user_id = competitor.user_id; // Map Angular's competitor.id to the server's user_id
+    console.log('user_id:', user_id);
+    const confirmation = confirm(`Do you want to delete ${competitor.name} ${competitor.lastname}?`);
+    if (confirmation) {
+      this.apiService.deletePlayer(user_id).subscribe({
+        next: () => {
+          // Remove the player from the list after successful deletion
+          const index = this.competitors.indexOf(competitor);
+          if (index !== -1) {
+            this.competitors.splice(index, 1);
+          }
+        },
+        error: (error) => {
+          console.error('Error deleting player:', error);
+        }
+      });
+    }
+  }
 
+  createPlayer() {
+    const existingPlayer = this.competitors.find(player => player.dni === this.newPlayer.dni);
     if (existingPlayer) {
       const errorMessage = `Player ${existingPlayer.name} ${existingPlayer.lastname} with DNI ${existingPlayer.dni} is already created.`;
       console.error(errorMessage);
@@ -89,7 +105,7 @@ export class RegisteredCompetitorsComponent implements OnInit {
         email: 'notset@padel.com',
         password: '123456',
         date_of_birth: '2000-01-01',
-        role:'player',
+        role: 'player',
       };
 
       this.apiService.createPlayer(playerData).subscribe({
