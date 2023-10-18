@@ -6,14 +6,17 @@ import { Tournament } from 'app/Tournament/tournament.model'; // Cambia 'tournam
   templateUrl: './tournament-item.component.html',
   styleUrls: ['./tournament-item.component.css']
 })
-export class TournamentItemComponent implements OnInit {
-  @Input() tournament: Tournament | undefined; // Cambia 'tournaments' a 'tournament'
-  @Output() tournamenteSelected = new EventEmitter<void>();
-  constructor() { }
 
-  ngOnInit(): void { }
+export class TournamentItemComponent {
+  @Input() tournament: Tournament = new Tournament('', '', '');
+  @Output() tournamentSelected = new EventEmitter<Tournament>();
 
-  onSelected() {
-    this.tournamenteSelected.emit(); 
+  onTournamentClick() {
+    this.tournamentSelected.emit(this.tournament);
   }
 }
+
+
+
+
+

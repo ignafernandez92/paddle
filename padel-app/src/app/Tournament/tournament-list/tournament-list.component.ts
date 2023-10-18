@@ -1,6 +1,7 @@
 // tournament-list.component.ts
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Tournament } from '../tournament.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tournament-list',
@@ -14,7 +15,7 @@ export class TournamentListComponent implements OnInit {
     new Tournament('Another Test Tournament', 'This is simply a test', 'https://i0.wp.com/mula.es/web/wp-content/uploads/2021/05/torneopadel2021.jpg?fit=918%2C1287&ssl=1')
   ]; // Replace 'any[]' with the actual type of your tournaments
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
 
@@ -22,7 +23,8 @@ export class TournamentListComponent implements OnInit {
 
   onTournamentSelected(tournament: Tournament) {
     this.tournamentWasSelected.emit(tournament);
+    console.log('torneo seleccionado')
+    this.router.navigate(['/tournament']);
 
   }
-  // other component logic here
 }

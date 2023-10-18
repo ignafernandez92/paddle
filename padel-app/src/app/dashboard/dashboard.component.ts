@@ -23,6 +23,7 @@ export class DashboardComponent {
         this.router.navigate(['/tournament']);
       } else {
         console.log('User is not authenticated');
+        this.router.navigate(['/login']);
         this.errorMessage = 'You need to be authenticated to access the tournament.';
       }
     }

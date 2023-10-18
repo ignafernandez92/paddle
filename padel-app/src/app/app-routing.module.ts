@@ -10,13 +10,13 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { TournamentComponent } from './Tournament/tournament.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  // { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'tournament', component: TournamentComponent, canActivate: [AuthGuard] }];
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'tournament', component: TournamentComponent}];
 @NgModule({
   imports: [RouterModule.forRoot(routes, { enableTracing: true, useHash:false })],
   exports: [RouterModule],
