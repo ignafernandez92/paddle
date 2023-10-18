@@ -13,16 +13,18 @@
           <a class="nav-link" (click)="onSelect('user-club')">Users</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" id="settingsDropdown" role="button"
+             [attr.data-bs-toggle]="isDropdownOpen ? '' : 'dropdown'" aria-expanded="false">
             Settings
           </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="">Linkedin</a></li>
-            <li><a class="dropdown-item" href="">Instagram</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="">Contact Us</a></li>
+          <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
+            <li><a class="dropdown-item" routerLink="/courts">Courts</a></li>
+            <li><a class="dropdown-item" routerLink="/couples">Couples</a></li>
+            <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+            <li><a class="dropdown-item" routerLink="/login">Log Out</a></li>
           </ul>
         </li>
+
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -31,6 +33,3 @@
     </div>
   </div>
 </nav>
-
-
-

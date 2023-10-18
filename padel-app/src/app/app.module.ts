@@ -19,7 +19,7 @@ import { TournamentListComponent } from './Tournament/tournament-list/tournament
 import { TournamentDetailComponent } from './Tournament/tournament-detail/tournament-detail.component';
 import { TournamentItemComponent } from './Tournament/tournament-list/tournament - item/tournament-item.component';
 import { RegisteredCompetitorsComponent } from 'app/user-club/registered-competitors/registered-competitors.component'
-import { CourtsComponent } from './user-club/courts/courts.component';
+import { CourtsComponent } from './courts/courts.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { MatIconModule } from '@angular/material/icon';
 

@@ -9,7 +9,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { TournamentComponent } from './Tournament/tournament.component';
 import { UserClubComponent } from './user-club/user-club.component';
-
+import { CourtsComponent } from './courts/courts.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -18,7 +18,8 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'tournament', component: TournamentComponent},
-  { path: 'user-club', component: UserClubComponent}];
+  { path: 'user-club', component: UserClubComponent},
+    { path: 'courts', component: CourtsComponent}];
 @NgModule({
   imports: [RouterModule.forRoot(routes, { enableTracing: true, useHash:false })],
   exports: [RouterModule],
