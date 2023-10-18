@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.sass'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   selectedRole: string = 'player';
   email: string = '';
   password: string = '';
@@ -18,6 +18,12 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router
   ) {}
+
+  ngOnInit() {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   onSubmit(): void {
     const loginData = {
@@ -36,7 +42,6 @@ export class LoginComponent {
       },
       error: (error) => {
         console.error('Error logging in:', error);
-        // Handle login error, show an error message, etc.
       },
     });
   }

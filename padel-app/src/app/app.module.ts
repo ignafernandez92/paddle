@@ -20,6 +20,7 @@ import { TournamentDetailComponent } from './Tournament/tournament-detail/tourna
 import { TournamentItemComponent } from './Tournament/tournament-list/tournament - item/tournament-item.component';
 import { RegisteredCompetitorsComponent } from 'app/user-club/registered-competitors/registered-competitors.component'
 import { CourtsComponent } from './user-club/courts/courts.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CourtsComponent } from './user-club/courts/courts.component';
     TournamentDetailComponent,
     TournamentItemComponent,
     RegisteredCompetitorsComponent,
-    CourtsComponent
+    CourtsComponent,
+    PaginationComponent
     
   ],
   imports: [

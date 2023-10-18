@@ -1,0 +1,12 @@
+<ul class="pagination">
+    <li [class.disabled]="noPrevious()">
+      <a href="javascript:void(0)" (click)="selectPage(currentPage - 1)">&lt;</a>
+    </li>
+    <li *ngFor="let page of getPages()" [class.active]="page === currentPage">
+      <a href="javascript:void(0)" (click)="selectPage(page)">{{ page }}</a>
+    </li>
+    <li [class.disabled]="noNext()">
+      <a href="javascript:void(0)" (click)="selectPage(currentPage + 1)">&gt;</a>
+    </li>
+  </ul>
+  

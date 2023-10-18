@@ -47,6 +47,14 @@ export class ApiService {
     deleteCourt(courtId: number): Observable<any> {
       return this.http.delete(`${this.baseUrlHttp}/${courtId}`);
     }
+
+    createPlayer(playerData: any): Observable<any> {
+      return this.http.post(`${this.baseUrlHttp}/players`, playerData);
+    }
+    getPlayers(): Observable<any> {
+      return this.http.get(`${this.baseUrlHttp}/players`);
+    }
+
   }
 
 

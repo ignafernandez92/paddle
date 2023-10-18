@@ -11,12 +11,12 @@ import { TournamentComponent } from './Tournament/tournament.component';
 import { UserClubComponent } from './user-club/user-club.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'registration', component: RegistrationComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'tournament', component: TournamentComponent},
   { path: 'user-club', component: UserClubComponent}];
 @NgModule({

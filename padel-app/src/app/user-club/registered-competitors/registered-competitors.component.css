@@ -1,0 +1,25 @@
+
+.table-title {
+    background-color: darkgreen;
+    color: white;
+    font-weight: bold;
+  }
+
+  .custom-table {
+    text-align: center;
+  }
+  
+  .custom-table th {
+    background-color: darkgreen;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .custom-table td {
+    border: 1px solid black;
+  }
+
+  .createplayer-titles {
+    color: black;
+    font-weight: bold;
+  }
