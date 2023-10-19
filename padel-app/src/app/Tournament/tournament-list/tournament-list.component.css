@@ -1,0 +1,19 @@
+.tournament-list-container {
+  max-width: 800px; /* Ajusta según tus necesidades */
+  margin: 20px auto;
+}
+
+.btn-success {
+  background-color: #008170;
+  color: #fff;
+}
+
+.btn-full-width {
+  width: 100%;
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
+/* Otros estilos según tus necesidades */

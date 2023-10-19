@@ -1,47 +1,45 @@
 <app-header (featureSelected)="onNavigate($event)"></app-header>
-<div class="container mt-4">
-    <h2>Nuevo Torneo</h2>
-    
-    <div class="form-group">
-      <label for="numberOfPairs">1. Cuántas parejas desea inscribir en el torneo?</label>
-  
-      <div class="btn-group btn-group-toggle d-block" data-toggle="buttons">
-        <label class="btn btn-outline-primary mb-2">
-          <input type="radio" name="numberOfPairs" id="option12" autocomplete="off"> 12
-        </label>
-        <label class="btn btn-outline-primary mb-2">
-          <input type="radio" name="numberOfPairs" id="option15" autocomplete="off"> 15
-        </label>
-        <label class="btn btn-outline-primary mb-2">
-          <input type="radio" name="numberOfPairs" id="option18" autocomplete="off"> 18
-        </label>
-        <label class="btn btn-outline-primary mb-2">
-          <input type="radio" name="numberOfPairs" id="option21" autocomplete="off"> 21
-        </label>
+<div class="tournament-container">
+  <h2>Nuevo Torneo</h2>
+
+  <div class="form-group">
+    <label for="numberOfPairs">1. Cuántas parejas desea inscribir en el torneo?</label>
+
+    <div class="btn-group btn-group-toggle d-block" data-toggle="buttons">
+      <label class="btn btn-outline-primary mb-2">
+        <input type="radio" name="numberOfPairs" id="option12" autocomplete="off"> 12
+      </label>
+      <label class="btn btn-outline-primary mb-2">
+        <input type="radio" name="numberOfPairs" id="option15" autocomplete="off"> 15
+      </label>
+      <label class="btn btn-outline-primary mb-2">
+        <input type="radio" name="numberOfPairs" id="option18" autocomplete="off"> 18
+      </label>
+      <label class="btn btn-outline-primary mb-2">
+        <input type="radio" name="numberOfPairs" id="option21" autocomplete="off"> 21
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="numberOfCourts">2. Cuántas canchas disponibles tiene el club?</label>
+    <div class="input-group">
+      <input type="number" class="form-control" id="numberOfCourts" name="numberOfCourts" min="1">
+      <div class="input-group-append">
+        <span class="input-group-text">canchas</span>
       </div>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="numberOfCourts">2. Cuántas canchas disponibles tiene el club?</label>
-           <div class="input-group">
-        <input type="number" class="form-control" id="numberOfCourts" name="numberOfCourts" min="1">
-        <div class="input-group-append">
-          <span class="input-group-text">canchas</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group">
+  <div class="form-group">
     <label for="startDate">Fecha de inicio del torneo</label>
     <input type="text" class="form-control" id="startDate" placeholder="Seleccionar fecha" bsDatepicker>
-    </div>
-    <div class="form-group">
+  </div>
+  <div class="form-group">
     <label for="endDate">Fecha de culminación del torneo</label>
     <input type="text" class="form-control" id="endDate" placeholder="Seleccionar fecha" bsDatepicker>
-    </div>
-  
+  </div>
 
+  <button class="btn btn-primary" (click)="onSaveTournament()">Generar Nuevo Torneo</button>
+</div>
 
-
-
- </div>

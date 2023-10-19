@@ -1,38 +1,20 @@
-<div class="row">
+<div class="row tournament-details">
     <div class="col-xs-12">
-        <img 
-        [src]="tournament?.imagePath" 
-        alt="{{ tournament?.name }}" 
-        class="img-responsive"
-        style="max-height: 300px;">
-    </div>
-<div class="row">
-    <div class="col-xs-12">
-        <h1>{{ tournament?.name }}</h1>
+        <img [src]="tournament?.imagePath" alt="{{ tournament?.name }}" class="img-responsive" style="max-height: 300px; margin-bottom: 20px;">
     </div>
 </div>
-<div class="row">
+<div class="row tournament-details">
     <div class="col-xs-12">
-    <div class="btn-group">
-        <button 
-        type="button" 
-        class="btn btn-primary dropdown-toggle">
-        Inscription 
-        <span class="caret"></span>
-       </button>
-       <ul class="dropdown-menu">
-        <li>Pay</li>
-        <li>Unsuscribe</li>
-       </ul>
-    </div>
+        <h1 class="tournament-name">{{ tournament?.name }}</h1>
     </div>
 </div>
-<div class="row">
+<div class="row tournament-details">
     <div class="col-xs-12">
-       {{ tournament?.description }}
+        <p class="tournament-description">{{ tournament?.description }}</p>
     </div>
-<div class="row">
+</div>
+<div class="row tournament-details">
     <div class="col-xs-12">
-        Participants 
+        <p class="section-title">Participants</p>
     </div>
 </div>

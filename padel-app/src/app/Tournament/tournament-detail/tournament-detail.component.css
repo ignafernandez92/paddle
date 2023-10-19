@@ -1,0 +1,28 @@
+.tournament-details {
+    margin-bottom: 20px;
+}
+
+.img-responsive {
+    max-height: 300px;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.tournament-name {
+    font-size: 24px;
+    color: #008170;
+    margin-bottom: 10px;
+}
+
+.tournament-description {
+    color: #FFFFFF;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    color: #008170;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
