@@ -57,8 +57,16 @@ export class ApiService {
     deletePlayer(user_id: number): Observable<any> {
       return this.http.delete(`${this.baseUrlHttp}/players/${user_id}`);
     }
-
-  }
+    
+    createTournament(tournamentData: any): Observable<any> {
+      return this.http.post(`${this.baseUrlHttp}/tournaments`, tournamentData)
+        .pipe(
+          catchError((error: any) => {
+            console.error('An error occurred:', error);
+            throw error;
+          })
+        );
+    }}
 
 
 

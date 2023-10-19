@@ -1,3 +1,41 @@
 .nav-link {
     cursor: pointer;
 }
+/* Establece la fuente para todo el componente */
+.navbar {
+    font-family: 'Raleway', sans-serif;
+  }
+  
+  /* Define variables para los colores de la paleta */
+  :root {
+    --color-text: #008170;
+    --color-background: #232D3F;
+  }
+  
+  /* Aplica los colores de la paleta utilizando las variables */
+  .navbar-brand,
+  .navbar-toggler-icon,
+  .navbar-nav .nav-link,
+  .dropdown-item,
+  .form-control,
+  .btn-outline-success {
+    color: var(--color-text);
+  }
+  
+  .bg-body-tertiary {
+    background-color: #232D3F;
+    color: #008170;
+    border-color: #008170;
+  }
+  
+ 
+  /* Opcional: Si deseas cambiar el color de texto de la barra de navegación */
+  .bg-body-tertiary .navbar-brand,
+  .bg-body-tertiary .navbar-toggler-icon,
+  .bg-body-tertiary .navbar-nav .nav-link,
+  .bg-body-tertiary .dropdown-item,
+  .bg-body-tertiary .form-control,
+  .bg-body-tertiary .btn-outline-success {
+    color: #008170;
+  }
+  

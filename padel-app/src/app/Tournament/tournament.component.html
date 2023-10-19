@@ -1,16 +1,12 @@
 <app-header (featureSelected)="onNavigate($event)"></app-header>
-<div class="row">
+<div class="tournament-container row">
     <div class="col-md-5">
-        <app-tournament-list
-        (tournamentWasSelected)="selectedTournament = $event"></app-tournament-list>
+        <app-tournament-list (tournamentWasSelected)="selectedTournament = $event"></app-tournament-list>
     </div>
     <div class="col-md-7">
-        <app-tournament-detail
-        *ngIf="selectedTournament; else infoText"
-        [tournament]="selectedTournament"></app-tournament-detail>
+        <app-tournament-detail *ngIf="selectedTournament; else infoText" [tournament]="selectedTournament"></app-tournament-detail>
         <ng-template #infoText>
             <p>Please select a Tournament!</p>
         </ng-template>
     </div>
 </div>
- 

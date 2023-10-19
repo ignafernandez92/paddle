@@ -1,12 +1,13 @@
 <app-header (featureSelected)="onNavigate($event)"></app-header>
-<h1>Add Court</h1>
-<form (ngSubmit)="onAddCourt()" #courtForm="ngForm">
-  <label for="court_number">Court Number:</label>
-  <input type="number" name="court_number" id="court_number" required [(ngModel)]="courtNumber" ngModel name="courtNumber">
-  <br>
-  <button type="submit">Add Court</button>
-</form>
-<table class="table">
+<div class="content-container">
+  <h1>Add Court</h1>
+  <form (ngSubmit)="onAddCourt()" #courtForm="ngForm">
+    <label for="court_number">Court Number:</label>
+    <input type="number" name="court_number" id="court_number" required [(ngModel)]="courtNumber" ngModel name="courtNumber">
+    <br>
+    <button type="submit">Add Court</button>
+  </form>
+  <table class="table">
     <thead>
       <tr>
         <th>Court ID</th>
@@ -15,8 +16,8 @@
       </tr>
     </thead>
     <tbody>
-        <ng-container *ngFor="let court of getCourtsForPage() | async; let i = index;">
-            <tr>
+      <ng-container *ngFor="let court of getCourtsForPage() | async; let i = index;">
+        <tr>
           <td>{{ court.court_id }}</td>
           <td>{{ court.court_number }}</td>
           <!-- Add more columns here if needed -->
@@ -24,10 +25,11 @@
       </ng-container>
     </tbody>
   </table>
-  
+
   <app-pagination
     [totalItems]="courts$.value.length"
     [itemsPerPage]="itemsPerPage"
     [currentPage]="currentPage"
     (pageChange)="onPageChange($event)"
   ></app-pagination>
+</div>

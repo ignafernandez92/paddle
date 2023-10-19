@@ -1,0 +1,12 @@
+body {
+    background-color: #0F0F0F; /* Color de fondo principal */
+    color: #008170; /* Color de texto principal */
+    font-family: 'Raleway', sans-serif; /* Fuente principal */
+  }
+  
+  .navbar {
+    background-color: #232D3F; /* Color de fondo del header */
+  }
+  
+  /* Puedes agregar más estilos aquí para otros elementos si es necesario */
+  

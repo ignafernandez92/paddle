@@ -1,26 +1,93 @@
+.player-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #232D3F;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.section-title {
+  color: #008170;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.divider {
+  border-color: #008170;
+}
+
+.player-form {
+  margin-bottom: 20px;
+}
+
+.createplayer-titles {
+  color: #008170;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  background-color: #005B41;
+  color: #fff;
+  border: 1px solid #008170;
+  border-radius: 4px;
+}
+
+.btn-primary {
+  background-color: #008170;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #005B41;
+}
+
+.alert-danger {
+  color: #fff;
+  background-color: #FF6347; /* Tomato color */
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
 
 .table-title {
-    background-color: darkgreen;
-    color: white;
-    font-weight: bold;
-  }
+  color: #008170;
+}
 
-  .custom-table {
-    text-align: center;
-  }
-  
-  .custom-table th {
-    background-color: darkgreen;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .custom-table td {
-    border: 1px solid black;
-  }
+.custom-table th, .custom-table td {
+  border: 1px solid #008170;
+  padding: 10px;
+  text-align: left;
+}
 
-  .createplayer-titles {
-    color: black;
-    font-weight: bold;
-  }
+.custom-table th {
+  background-color: #005B41;
+  color: #fff;
+}
 
+.custom-table td {
+  background-color: #232D3F;
+  color: #fff;
+}
+
+.vertical-line {
+  border-left: 1px solid #008170;
+  padding-left: 10px;
+}
+
+.fa-trash {
+  color: #FF6347; /* Tomato color */
+  cursor: pointer;
+}

@@ -1,0 +1,17 @@
+.tournament-container {
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.col-md-5,
+.col-md-7 {
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+p {
+  color: #008170;
+  font-size: 18px;
+}
+
+/* Add additional styling as needed */

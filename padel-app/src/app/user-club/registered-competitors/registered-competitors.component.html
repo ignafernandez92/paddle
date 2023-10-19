@@ -1,67 +1,73 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<p>Register new players</p>
-<hr>
-<div class="row">
-  <div class="col-xs-12">
-    <!-- New player creation form -->
-    <form (ngSubmit)="createPlayer()">
-      <div class="row">
-        <div class="col-sm-5 form-group">
-          <label for="name" class="createplayer-titles">Name</label>
-          <input type="text" id="name" class="form-control" [(ngModel)]="newPlayer.name" name="name">
+
+<div class="player-container">
+  <p class="section-title">Register new players</p>
+  <hr class="divider">
+  <div class="row">
+    <div class="col-xs-12">
+      <!-- New player creation form -->
+      <form (ngSubmit)="createPlayer()" class="player-form">
+        <div class="row">
+          <div class="col-sm-5 form-group">
+            <label for="name" class="createplayer-titles">Name</label>
+            <input type="text" id="name" class="form-control" [(ngModel)]="newPlayer.name" name="name">
+          </div>
+          <div class="col-sm-5 form-group">
+            <label for="lastname" class="createplayer-titles">Last Name</label>
+            <input type="text" id="lastname" class="form-control" [(ngModel)]="newPlayer.lastname" name="lastname">
+          </div>
+          <div class="col-sm-2 form-group">
+            <label for="dni" class="createplayer-titles">DNI</label>
+            <input type="number" id="dni" class="form-control" [(ngModel)]="newPlayer.dni" name="dni">
+          </div>
         </div>
-        <div class="col-sm-5 form-group">
-          <label for="lastname" class="createplayer-titles">Last Name</label>
-          <input type="text" id="lastname" class="form-control" [(ngModel)]="newPlayer.lastname" name="lastname">
+        <br>
+        <div class="row">
+          <div class="col-xs-12">
+            <button type="submit" class="btn btn-primary">Create Player</button>
+          </div>
         </div>
-        <div class="col-sm-2 form-group">
-          <label for="dni" class="createplayer-titles" >DNI</label>
-          <input type="number" id="dni" class="form-control" [(ngModel)]="newPlayer.dni" name="dni">
-        </div>
-      </div>
+      </form>
       <br>
-      <div class="row">
-        <div class="col-xs-12">
-          <button type="submit" class="btn btn-primary">Create Player</button>
-        </div>
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
       </div>
-    </form>
-    <br>
-    <div *ngIf="errorMessage" class="alert alert-danger">
-      {{ errorMessage }}
     </div>
   </div>
-</div>
-<br>
-<p>Registered players</p>
-<br>
-<!-- Player list table -->
-<div class="row">
-  <div class="col-xs-10"></div>
-  <hr>
-  <table class="table custom-table">
-    <thead>
-      <tr>
-        <th class="table-title">Name</th>
-        <th class="table-title">Last Name</th>
-        <th class="table-title">DNI</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let competitor of competitors.slice(lastShownIndex, lastShownIndex + itemsPerPage); let i = index;">
-        <ng-container *ngFor="let column of tableColumns">
-          <td>{{ getCompetitorProperty(competitor, column) }}</td>
-        </ng-container>
-        <td class="vertical-line">
-          <i class="fa fa-trash" style="cursor: pointer;" (click)="deletePlayer(competitor)"></i>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <app-pagination
-    [totalItems]="competitors.length"
-    [itemsPerPage]="itemsPerPage"
-    [currentPage]="currentPage"
-    (pageChange)="onPageChange($event)"
-  ></app-pagination>
+  <br>
+  <p class="section-title">Registered players</p>
+  <br>
+  <!-- Player list table -->
+  <div class="row">
+    <div class="col-xs-10"></div>
+    <hr class="divider">
+    <table class="table custom-table">
+      <thead>
+        <tr>
+          <th class="table-title">Name</th>
+          <th class="table-title">Last Name</th>
+          <th class="table-title">DNI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let competitor of competitors.slice(lastShownIndex, lastShownIndex + itemsPerPage); let i = index;">
+          <ng-container *ngFor="let column of tableColumns">
+            <td>{{ getCompetitorProperty(competitor, column) }}</td>
+          </ng-container>
+          <td class="vertical-line">
+            <i class="fa fa-trash" style="cursor: pointer;" (click)="deletePlayer(competitor)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <app-pagination
+      [totalItems]="competitors.length"
+      [itemsPerPage]="itemsPerPage"
+      [currentPage]="currentPage"
+      (pageChange)="onPageChange($event)"
+    ></app-pagination>
+  </div>
 </div>

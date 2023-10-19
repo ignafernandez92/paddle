@@ -1,3 +1,17 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import "~bootstrap/dist/css/bootstrap.min.css";
+
+html, body {
+    background-color: #005b41; /* Color de fondo principal */
+    color: #008170; /* Color de texto principal */
+    font-family: 'Raleway', sans-serif; /* Fuente principal */
+    height: 0%;
+}
+  
+  /* Puedes agregar más estilos aquí para otros elementos si es necesario */
+  
+  
+  .navbar {
+    background-color: #232D3F; /* Color de fondo del header */
+  }

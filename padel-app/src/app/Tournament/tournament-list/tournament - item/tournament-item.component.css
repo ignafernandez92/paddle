@@ -1,0 +1,25 @@
+.tournament-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #232D3F;
+    color: #FFFFFF;
+    border: 1px solid #008170;
+    margin-bottom: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.tournament-item:hover {
+    background-color: #005B41;
+}
+
+.list-group-item-heading,
+.list-group-item-text {
+    margin: 0;
+}
+
+.img-responsive {
+    max-height: 100px;
+    max-width: 100%;
+}
