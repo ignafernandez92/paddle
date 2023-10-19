@@ -1,48 +1,42 @@
-// Función para asignar club y horario únicos sin superposiciones
-function asignarClubYHorario(enfrentamientos, clubes, clubIndex, horas, horarioBase, duracionEnfrentamiento) {
-    const disponibles = [];
-    const clubNombre = clubes[clubIndex].nombre;
+function asignarParejasAZonas(parejas) {
+    const parejasAleatorias = parejas.slice();
+    const zonasAsignadas = [];
 
-    for (const horario of horas) {
-        let superposicion = false;
+    function ordenarZonasPorNombre(a, b) {
+        return a.zona.localeCompare(b.zona);
+    }
 
-        for (const enfrentamiento of enfrentamientos) {
-            if (enfrentamiento.club === clubNombre) {
-                const horaFinEnfrentamiento = (enfrentamiento.horario + duracionEnfrentamiento) % 24;
-                if ((horario >= enfrentamiento.horario && horario < horaFinEnfrentamiento) ||
-                    (horario < enfrentamiento.horario && (horario + duracionEnfrentamiento) > enfrentamiento.horario)) {
-                    superposicion = true;
-                    break;
-                }
-            }
-        }
-
-        const horariosOcupados = horariosOcupadosPorClub[clubNombre];
-        for (const ocupado of horariosOcupados) {
-            const horaFinOcupado = (ocupado + duracionEnfrentamiento) % 24;
-            if ((horario >= ocupado && horario < horaFinOcupado) ||
-                (horario < ocupado && (horario + duracionEnfrentamiento) > ocupado)) {
-                superposicion = true;
+    while (parejasAleatorias.length > 0) {
+        const zona = { zona: String.fromCharCode(65 + zonasAsignadas.length), parejas: [] };
+        
+        for (let i = 0; i < 3; i++) {
+            if (parejasAleatorias.length === 0) {
                 break;
             }
+            const parejaIndex = Math.floor(Math.random() * parejasAleatorias.length);
+            const pareja = parejasAleatorias.splice(parejaIndex, 1)[0];
+            zona.parejas.push(pareja);
         }
 
-        const separacionMinimaCumplida = (horario - horarioBase + 24) % 24 >= duracionEnfrentamiento;
-
-        if (!superposicion && separacionMinimaCumplida) {
-            disponibles.push({ horario });
-        }
+        zonasAsignadas.push(zona);
     }
 
-    if (disponibles.length === 0) {
-        return null; // Si no hay horarios disponibles, retorna null
-    }
+    zonasAsignadas.forEach((zona) => {
+        const parejasRestantes = parejas.filter(pareja => !zona.parejas.includes(pareja));
+        zona.parejas.forEach((pareja, index) => {
+            const parejaContrincante = parejasRestantes[index];
+            console.log(`Zona ${zona.zona}`);
+            console.log(`    Pareja ${pareja} vs ${parejaContrincante}`);
+        });
+        console.log('\n');
+    });
 
-    // Actualiza los horarios ocupados del club actual
-    horariosOcupadosPorClub[clubNombre].push(disponibles[0].horario);
+    zonasAsignadas.sort(ordenarZonasPorNombre);
 
-    return { club: clubNombre, horario: disponibles[0].horario };
+    return zonasAsignadas;
 }
 
-
-//ANDA PERFECTO EL SORTEO ALEATORIO MAS ENFRENTAMIENTOS
+// Ejemplo de uso
+const parejasPorTorneo = 12; // Cambiar la cantidad de parejas según tus necesidades
+const parejas = Array.from({ length: parejasPorTorneo }, (_, i) => `Pareja ${i + 1}`);
+asignarParejasAZonas(parejas);
