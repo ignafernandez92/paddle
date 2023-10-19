@@ -15,6 +15,10 @@ export class TournamentListComponent implements OnInit {
     new Tournament('Another Test Tournament', 'This is simply a test', 'https://i0.wp.com/mula.es/web/wp-content/uploads/2021/05/torneopadel2021.jpg?fit=918%2C1287&ssl=1')
   ]; // Replace 'any[]' with the actual type of your tournaments
 
+  navigateToNewTournament() {
+  this.router.navigate(['/new-tournament']);
+}
+
   constructor(private router: Router) {}
 
   ngOnInit() {

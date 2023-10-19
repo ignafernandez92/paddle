@@ -22,6 +22,16 @@ import { RegisteredCompetitorsComponent } from 'app/user-club/registered-competi
 import { CourtsComponent } from './courts/courts.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { MatIconModule } from '@angular/material/icon';
+import { NewTournamentComponent } from './new-tournament/new-tournament.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { esLocale } from 'ngx-bootstrap/locale';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';  
+
+defineLocale('es', esLocale); // Importa el idioma español
 
 
 @NgModule({
@@ -40,8 +50,9 @@ import { MatIconModule } from '@angular/material/icon';
     TournamentItemComponent,
     RegisteredCompetitorsComponent,
     CourtsComponent,
-    PaginationComponent
-    
+    PaginationComponent,
+    NewTournamentComponent,
+        
   ],
   imports: [
     BrowserModule,
@@ -50,6 +61,12 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     HttpClientModule,
     MatIconModule,
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
+    MatInputModule,
+    MatDatepickerModule,
+    MatButtonModule,
+    
   ],
   providers: [
     { provide: LocationStrategy, useClass: PathLocationStrategy },
@@ -57,3 +74,4 @@ import { MatIconModule } from '@angular/material/icon';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
