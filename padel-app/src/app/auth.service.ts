@@ -2,13 +2,14 @@
 import { Injectable } from '@angular/core';
 import jwt_decode from 'jwt-decode';
 import { environment } from '../environments/environments'; 
-
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private secretKey = environment.SECRET_KEY_USER;
-
+  constructor(private http: HttpClient) {}
   verifyToken(token: string): any {
     try {
       const decodedToken = jwt_decode(token);
@@ -41,5 +42,8 @@ export class AuthService {
     }
     console.log('AuthService - isAuthenticated');
     return false;
+  }
+  getUserID(): Observable<{ user_id: string }> {
+    return this.http.get<{ user_id: string }>('/api/get-user-id');
   }
 }

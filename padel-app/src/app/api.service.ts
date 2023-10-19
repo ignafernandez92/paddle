@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { environment } from '../environments/environments';
 import { catchError } from 'rxjs/operators';
 import { Competitor } from 'app/shared/competitors.model';
+import { tap } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -59,26 +61,17 @@ export class ApiService {
     }
     
     createTournament(tournamentData: any): Observable<any> {
-      return this.http.post(`${this.baseUrlHttp}/tournaments`, tournamentData)
-        .pipe(
-          catchError((error: any) => {
-            console.error('An error occurred:', error);
-            throw error;
-          })
+      console.log('Request sent to create tournament:', tournamentData); // Add this line
+      return this.http.post(`${this.baseUrlHttp}/tournaments`, tournamentData).pipe(
+        tap((response: any) => {
+          console.log('Tournament created successfully:', response);
+        }),
+        catchError((error: any) => {
+          console.error('Error creating tournament:', error);
+          throw error; // Rethrow the error to propagate it to the component
+        })
         );
+        
     }}
 
 
-
-  // private baseUrl = environment.apiUrl;
-
-
-  // registerUser(userData: any): Observable<any> {
-  //   return this.http.post(`${this.baseUrl}/register`, userData); 
-  // }
-
-  // loginUser(userData: any): Observable<any> {
-  //   return this.http.post(`${this.baseUrl}/login`, userData); 
-  // }
-
-  

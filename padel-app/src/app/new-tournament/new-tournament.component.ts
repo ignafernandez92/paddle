@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { AuthService } from '../auth.service';
 import { NavigationService } from '../navigation.service';
+import { Tournament } from './tournament-model';
 
 @Component({
   selector: 'app-new-tournament',
@@ -10,26 +12,33 @@ import { NavigationService } from '../navigation.service';
 })
 export class NewTournamentComponent implements OnInit {
   errorMessage: string = '';
-  numberOfPairs: number = 12; // Valor por defecto
-  numberOfCourts: number = 1; // Valor por defecto
-  startDate: string = ''; // Valor por defecto
-  endDate: string = ''; // Valor por defecto
+  tournamentForm: FormGroup;
+  user_id: string;
 
   constructor(
     private authService: AuthService,
     private navigationService: NavigationService,
-    private apiService: ApiService // Agrega el servicio ApiService
-  ) {}
+    private apiService: ApiService,
+    private formBuilder: FormBuilder
+  ) {
+    this.tournamentForm = this.formBuilder.group({
+      numberOfPairs: [12, Validators.required],
+      numberOfCourts: [1, Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required]
+    });
+    this.user_id = '';
+  }
 
   onNavigate(feature: string) {
     console.log('onNavigate called with feature:', feature);
-    
+
     if (this.authService.isAuthenticated()) {
       console.log(`User is authenticated, navigating to ${feature}`);
       this.navigationService.navigateTo(feature);
     } else {
       console.log('User is not authenticated');
-      this.navigationService.navigateTo('login'); 
+      this.navigationService.navigateTo('login');
       this.errorMessage = `You need to be authenticated to access the ${feature}.`;
     }
   }
@@ -43,31 +52,33 @@ export class NewTournamentComponent implements OnInit {
   }
 
   onSaveTournament() {
-    // Aquí debes enviar estos datos al backend
-    const tournamentData = {
-      numberOfPairs: this.numberOfPairs,
-      numberOfCourts: this.numberOfCourts,
-      startDate: this.startDate,
-      endDate: this.endDate,
-      // Otros datos que puedan ser necesarios
-    };
+    if (this.tournamentForm.valid) {
+      const formValues = this.tournamentForm.value;
+      console.log('Form values to be sent to the backend:', formValues);
 
-    this.apiService.createTournament(tournamentData).subscribe(
-      (response) => {
-        console.log('Tournament created successfully:', response);
-        // Puedes realizar acciones adicionales después de crear el torneo
-      },
-      (error) => {
-        console.error('Error creating tournament:', error);
-        // Manejar errores aquí
-      }
-    );
+      const newTournament = new Tournament(
+        formValues.startDate,
+        formValues.endDate,
+        formValues.numberOfPairs,
+        formValues.numberOfCourts,
+        this.user_id
+      );
+
+      this.authService.getUserID().subscribe(
+        (response) => {
+          if (response && response.user_id) {
+            newTournament.user_id = response.user_id;
+            // Continue with creating the tournament
+          } else {
+            console.error('User ID is not available.');
+          }
+        },
+        (error) => {
+          console.error('Error while getting user ID:', error);
+        }
+      );
+    } else {
+      console.error('Form is invalid. Please check the form fields.');
+    }
   }
 }
-
-
-
-
-
-  
-  

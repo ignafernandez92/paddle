@@ -35,12 +35,15 @@ router.post('/', async (req, res) => {
       role,
     });
 
+   
     console.log('User created successfully:', newUser);
     res.status(201).json({ message: 'User created successfully', user: newUser });
   } catch (error) {
     console.error('Error while creating user:', error);
     res.status(500).json({ message: 'Error creating user', error: error.message });
   }
+
+
 });
 
 module.exports = router;

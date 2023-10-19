@@ -92,6 +92,7 @@ export class RegisteredCompetitorsComponent implements OnInit {
   }
 
   createPlayer() {
+    console.log('createPlayer function is being called');
     const existingPlayer = this.competitors.find(player => player.dni === this.newPlayer.dni);
     if (existingPlayer) {
       const errorMessage = `Player ${existingPlayer.name} ${existingPlayer.lastname} with DNI ${existingPlayer.dni} is already created.`;
@@ -107,14 +108,18 @@ export class RegisteredCompetitorsComponent implements OnInit {
         date_of_birth: '2000-01-01',
         role: 'player',
       };
-
+  
       this.apiService.createPlayer(playerData).subscribe({
         next: (response) => {
           console.log('Player created:', response);
-          this.competitors.push(response.player);
+          const newCompetitor = new Competitor(response.player.user_id, response.player.f_name, response.player.l_name, response.player.dni);
+          this.competitors.push(newCompetitor);
+          console.log('Updated Competitors:', this.competitors);
           this.newPlayer = { name: '', lastname: '', dni: '' };
           this.errorMessage = '';
-          this.getPlayers();
+          // Manually update the competitors array here
+          this.competitors = [...this.competitors, newCompetitor];
+          
         },
         error: (error) => {
           console.error('Error creating player:', error);

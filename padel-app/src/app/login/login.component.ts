@@ -12,12 +12,15 @@ export class LoginComponent implements OnInit {
   selectedRole: string = 'player';
   email: string = '';
   password: string = '';
+  user_id: string; // Add this property to store user_id
 
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) {
+    this.user_id = '';
+  }
 
   ngOnInit() {
     if (this.authService.isAuthenticated()) {
@@ -38,6 +41,12 @@ export class LoginComponent implements OnInit {
 
         const token = response.token;
         this.authService.setToken(token);
+
+        // After successful login, fetch and store the user_id
+        this.authService.getUserID().subscribe((userResponse) => {
+          this.user_id = userResponse.user_id; // Assuming this is how you get user_id
+        });
+
         this.router.navigate(['/dashboard']);
       },
       error: (error) => {

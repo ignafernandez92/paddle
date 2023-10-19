@@ -1,45 +1,47 @@
 <app-header (featureSelected)="onNavigate($event)"></app-header>
 <div class="tournament-container">
-  <h2>Nuevo Torneo</h2>
+  <h2>New Tournament</h2>
 
-  <div class="form-group">
-    <label for="numberOfPairs">1. Cuántas parejas desea inscribir en el torneo?</label>
-
-    <div class="btn-group btn-group-toggle d-block" data-toggle="buttons">
-      <label class="btn btn-outline-primary mb-2">
-        <input type="radio" name="numberOfPairs" id="option12" autocomplete="off"> 12
-      </label>
-      <label class="btn btn-outline-primary mb-2">
-        <input type="radio" name="numberOfPairs" id="option15" autocomplete="off"> 15
-      </label>
-      <label class="btn btn-outline-primary mb-2">
-        <input type="radio" name="numberOfPairs" id="option18" autocomplete="off"> 18
-      </label>
-      <label class="btn btn-outline-primary mb-2">
-        <input type="radio" name="numberOfPairs" id="option21" autocomplete="off"> 21
-      </label>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="numberOfCourts">2. Cuántas canchas disponibles tiene el club?</label>
-    <div class="input-group">
-      <input type="number" class="form-control" id="numberOfCourts" name="numberOfCourts" min="1">
-      <div class="input-group-append">
-        <span class="input-group-text">canchas</span>
+  <form [formGroup]="tournamentForm" (ngSubmit)="onSaveTournament()">
+    <div class="form-group">
+      <label for="numberOfPairs">1. How many couples will participate?</label>
+      <div class="btn-group btn-group-toggle d-block" data-toggle="buttons">
+        <label class="btn btn-outline-primary mb-2">
+          <input type="radio" name="numberOfPairs" id="option12" [value]="12" formControlName="numberOfPairs"> 12
+        </label>
+        <label class="btn btn-outline-primary mb-2">
+          <input type="radio" name="numberOfPairs" id="option15" [value]="15" formControlName="numberOfPairs"> 15
+        </label>
+        <label class="btn btn-outline-primary mb-2">
+          <input type="radio" name="numberOfPairs" id="option18" [value]="18" formControlName="numberOfPairs"> 18
+        </label>
+        <label class="btn btn-outline-primary mb-2">
+          <input type="radio" name="numberOfPairs" id="option21" [value]="21" formControlName="numberOfPairs"> 21
+        </label>
       </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="startDate">Fecha de inicio del torneo</label>
-    <input type="text" class="form-control" id="startDate" placeholder="Seleccionar fecha" bsDatepicker>
-  </div>
-  <div class="form-group">
-    <label for="endDate">Fecha de culminación del torneo</label>
-    <input type="text" class="form-control" id="endDate" placeholder="Seleccionar fecha" bsDatepicker>
-  </div>
+    <div class="form-group">
+      <label for="numberOfCourts">2. How many courts will be used?</label>
+      <div class="input-group">
+        <input type="number" class="form-control" id="numberOfCourts" name="numberOfCourts" min="1" formControlName="numberOfCourts">
+        <div class="input-group-append">
+          <br>
+          <span class="input-group-text">Couples organizer</span>
+        </div>
+      </div>
+    </div>
 
-  <button class="btn btn-primary" (click)="onSaveTournament()">Generar Nuevo Torneo</button>
+    <div class="form-group">
+      <label for="startDate">Tournament start date and time</label>
+      <input type="datetime-local" class="form-control" id="startDateTime" name="startDateTime" formControlName="startDate">
+    </div>
+
+    <div class="form-group">
+      <label for="endDate">Tournament end date and time</label>
+      <input type="datetime-local" class="form-control" id="endDateTime" name="endDateTime" formControlName="endDate">
+    </div>
+
+    <button class="btn btn-primary" type="submit">Generate tournament brackets</button>
+  </form>
 </div>
-

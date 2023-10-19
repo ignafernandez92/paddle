@@ -40,15 +40,15 @@ const courtRoutes = require('./routes/courtRoutes');
 const RegisterRoutes = require('./routes/register');
 const login = require('./routes/login');
 const forgotPasswordRoutes = require('./routes/forgot-password');
+const user_id = require('./routes/user_id');
 
 app.use('/login', login);
-app.use('/tournament', tournamentRoutes);
+app.use('/tournaments', tournamentRoutes);
 app.use('/matches', matchRoutes);
 app.use('/players', playerRoutes);
 app.use('/courts', courtRoutes);
 app.use('/register', RegisterRoutes);
 app.use('/password-reset', forgotPasswordRoutes);
-
-
+app.use('/api/get-user-id', user_id);
 
 module.exports = app;
