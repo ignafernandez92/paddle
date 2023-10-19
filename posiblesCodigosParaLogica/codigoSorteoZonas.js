@@ -22,12 +22,12 @@ function asignarParejasAZonas(parejas) {
     }
 
     zonasAsignadas.forEach((zona) => {
-        const parejasRestantes = parejas.filter(pareja => !zona.parejas.includes(pareja));
-        zona.parejas.forEach((pareja, index) => {
-            const parejaContrincante = parejasRestantes[index];
-            console.log(`Zona ${zona.zona}`);
-            console.log(`    Pareja ${pareja} vs ${parejaContrincante}`);
-        });
+        console.log(`Zona ${zona.zona}`);
+        for (let i = 0; i < zona.parejas.length; i++) {
+            for (let j = i + 1; j < zona.parejas.length; j++) {
+                console.log(`    Pareja ${zona.parejas[i]} vs Pareja ${zona.parejas[j]}`);
+            }
+        }
         console.log('\n');
     });
 
@@ -40,3 +40,6 @@ function asignarParejasAZonas(parejas) {
 const parejasPorTorneo = 12; // Cambiar la cantidad de parejas según tus necesidades
 const parejas = Array.from({ length: parejasPorTorneo }, (_, i) => `Pareja ${i + 1}`);
 asignarParejasAZonas(parejas);
+
+
+
