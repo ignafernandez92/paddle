@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql2');
+const connection = require('../db');
 require('dotenv').config();
 
 
@@ -21,30 +22,26 @@ router.get('/:id', (req, res) => {
 // Ruta: POST /tournaments
 router.post('/', (req, res) => {
   try {
-    const { startDate, endDate,user_id, numberOfPairs, numberOfCourts,  } = req.body;
+    const { startDate, endDate, user_id, numberOfPairs, numberOfCourts } = req.body;
 
     console.log('Received a POST request to create a tournament:', req.body);
 
     const currentTimestamp = new Date().toISOString();
-
-    // You should set up authentication to get the creator_id.
-    // Replace 'req.user.creator_id' with the actual way you get the creator_id.
 
     console.log('Values to be sent to the database:');
     console.log('startDate:', startDate);
     console.log('endDate:', endDate);
     console.log('number_ofCourts:', numberOfCourts);
     console.log('number_ofPairs:', numberOfPairs);
-    console.log('creator_id:', user_id);
+    console.log('user_id:', user_id); 
     console.log('currentTimestamp:', currentTimestamp);
 
-    const query = `INSERT INTO tournaments (start_date, end_date, creator_id, created_at, updated_at, number_of_courts, number_of_pairs)
+    const query = `INSERT INTO tournaments (start_date, end_date, creator_id, created_at, updated_at, number_of_courts, tournament_type)
                    VALUES (?, ?, ?, ?, ?, ?, ?)`;
-
     const values = [
       startDate,
       endDate,
-      user_id,
+      user_id, 
       currentTimestamp,
       currentTimestamp,
       numberOfCourts,
@@ -56,6 +53,7 @@ router.post('/', (req, res) => {
         console.error('Error creating tournament:', error);
         res.status(400).json({ message: 'Error al registrar el torneo', error });
       } else {
+        console.log('Tournament successfully created in the database.');
         res.status(201).json({
           tournament: {
             id: results.insertId,
@@ -63,12 +61,13 @@ router.post('/', (req, res) => {
             end_date: endDate,
             number_ofCourts: numberOfCourts,
             number_ofPairs: numberOfPairs,
-            creator_id: user_id,
+            user_id: user_id, // Use user_id instead of creator_id
           },
         });
       }
     });
   } catch (error) {
+    console.error('Exception caught while creating a tournament:', error);
     res.status(400).json({ message: 'Error al registrar el torneo', error });
   }
 });

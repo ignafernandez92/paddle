@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const cors = require('cors'); 
 const app = express();
 
+
 const secretKey = process.env.SECRET_KEY_USER;
 
 
@@ -19,12 +20,17 @@ app.use(session({
 
 app.use(morgan('combined')); 
 app.use(cors({
-  origin: 'http://localhost:4200',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: 'http://localhost:4200', 
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, 
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
 }));
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
   next();
 });
 app.options('*', cors());
@@ -41,6 +47,7 @@ const RegisterRoutes = require('./routes/register');
 const login = require('./routes/login');
 const forgotPasswordRoutes = require('./routes/forgot-password');
 const user_id = require('./routes/user_id');
+const requireAuth = require('./passport-config');
 
 app.use('/login', login);
 app.use('/tournaments', tournamentRoutes);
@@ -50,5 +57,9 @@ app.use('/courts', courtRoutes);
 app.use('/register', RegisterRoutes);
 app.use('/password-reset', forgotPasswordRoutes);
 app.use('/api/get-user-id', user_id);
+
+app.get('/protected', requireAuth, (req, res) => {
+  res.json({ message: 'This is a protected route.' });
+});
 
 module.exports = app;

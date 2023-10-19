@@ -43,7 +43,7 @@ export class AuthService {
     console.log('AuthService - isAuthenticated');
     return false;
   }
-  getUserID(): Observable<{ user_id: string }> {
-    return this.http.get<{ user_id: string }>('/api/get-user-id');
-  }
+  // getUserID(): Observable<{ user_id: string }> {
+  //   return this.http.get<{ user_id: string }>('/api/get-user-id');
+  // }
 }

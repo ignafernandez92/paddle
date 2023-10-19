@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-// This route should return the user's ID based on the authentication middleware setup
 router.get('/', (req, res) => {
+    console.log('ruta user_id accedida')
   const { user_id } = req.user;
   res.json({ user_id });
 });

@@ -13,7 +13,7 @@ import { Tournament } from './tournament-model';
 export class NewTournamentComponent implements OnInit {
   errorMessage: string = '';
   tournamentForm: FormGroup;
-  user_id: string;
+  user_id: number = 1; 
 
   constructor(
     private authService: AuthService,
@@ -27,7 +27,6 @@ export class NewTournamentComponent implements OnInit {
       startDate: ['', Validators.required],
       endDate: ['', Validators.required]
     });
-    this.user_id = '';
   }
 
   onNavigate(feature: string) {
@@ -55,30 +54,26 @@ export class NewTournamentComponent implements OnInit {
     if (this.tournamentForm.valid) {
       const formValues = this.tournamentForm.value;
       console.log('Form values to be sent to the backend:', formValues);
-
-      const newTournament = new Tournament(
-        formValues.startDate,
-        formValues.endDate,
-        formValues.numberOfPairs,
-        formValues.numberOfCourts,
-        this.user_id
-      );
-
-      this.authService.getUserID().subscribe(
+  
+      const newTournamentData = {
+        startDate: formValues.startDate,
+        endDate: formValues.endDate,
+        numberOfPairs: formValues.numberOfPairs,
+        numberOfCourts: formValues.numberOfCourts,
+        user_id: this.user_id,
+      };
+  
+      this.apiService.createTournament(newTournamentData).subscribe(
         (response) => {
-          if (response && response.user_id) {
-            newTournament.user_id = response.user_id;
-            // Continue with creating the tournament
-          } else {
-            console.error('User ID is not available.');
-          }
+          console.log('Tournament created successfully:', response);
+          // Handle success here
         },
         (error) => {
-          console.error('Error while getting user ID:', error);
+          console.error('Error creating tournament:', error);
+          // Handle errors here
         }
       );
     } else {
       console.error('Form is invalid. Please check the form fields.');
     }
-  }
-}
+  } }
