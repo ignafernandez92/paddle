@@ -1,44 +1,46 @@
-<h2 class="section-title">Registration</h2>
+<div class="registration-container">
+  <h2 class="section-title center-title">Registration</h2>
 
-<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="registration-form">
+
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="player-form">
   <div class="form-group">
-    <label for="f_name">First Name:</label>
-    <input type="text" id="f_name" name="f_name" formControlName="f_name" required class="form-control">
+    <label for="f_name" class="createplayer-titles">First Name:</label>
+    <input type="text" id="f_name" name="f_name" formControlName="f_name" required>
   </div>
 
   <div class="form-group">
-    <label for="l_name">Last Name:</label>
-    <input type="text" id="l_name" name="l_name" formControlName="l_name" required class="form-control">
+    <label for="l_name" class="createplayer-titles">Last Name:</label>
+    <input type="text" id="l_name" name="l_name" formControlName="l_name" required>
   </div>
 
   <div class="form-group">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" formControlName="username" required class="form-control">
+    <label for="username" class="createplayer-titles">Username:</label>
+    <input type="text" id="username" name="username" formControlName="username" required>
   </div>
 
   <div class="form-group">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" formControlName="email" required class="form-control">
+    <label for="email" class="createplayer-titles">Email:</label>
+    <input type="email" id="email" name="email" formControlName="email" required>
   </div>
 
   <div class="form-group">
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" formControlName="password" required class="form-control">
+    <label for="password" class="createplayer-titles">Password:</label>
+    <input type="password" id="password" name="password" formControlName="password" required>
   </div>
 
   <div class="form-group">
-    <label for="dni">DNI:</label>
-    <input type="text" id="dni" name="dni" formControlName="dni" required class="form-control">
+    <label for="dni" class="createplayer-titles">DNI:</label>
+    <input type="text" id="dni" name="dni" formControlName="dni" required>
   </div>
 
   <div class="form-group">
-    <label for="date_of_birth">Date of Birth:</label>
-    <input type="date" id="date_of_birth" name="date_of_birth" formControlName="date_of_birth" required class="form-control">
+    <label for="date_of_birth" class="createplayer-titles">Date of Birth:</label>
+    <input type="date" id="date_of_birth" name="date_of_birth" formControlName="date_of_birth" required>
   </div>
 
   <div class="form-group">
-    <label for="role">Role:</label>
-    <select id="role" name="role" formControlName="role" required class="form-control">
+    <label for="role" class="createplayer-titles">Role:</label>
+    <select id="role" name="role" formControlName="role" required>
       <option value="player">Player</option>
       <option value="club_admin">Club Admin</option>
     </select>
@@ -46,5 +48,17 @@
 
   <button type="submit" class="btn btn-primary">Register</button>
 
-  <!-- Resto de los mensajes de advertencia -->
+  <div class="alert alert-danger" *ngIf="registrationStatus === 'success'">{{ registrationMessage }}</div>
+  <div class="alert alert-danger" *ngIf="registrationStatus === 'error'">{{ registrationMessage }}</div>
+
+  <div class="alert alert-danger" *ngIf="registrationForm.get('f_name')?.touched && registrationForm.get('f_name')?.invalid">First Name is required.</div>
+  <div class="alert alert-danger" *ngIf="registrationForm.get('l_name')?.touched && registrationForm.get('l_name')?.invalid">Last Name is required.</div>
+  <div class="alert alert-danger" *ngIf="registrationForm.get('username')?.touched && registrationForm.get('username')?.invalid">Username is required.</div>
+  <div class="alert alert-danger" *ngIf="registrationForm.get('email')?.touched && registrationForm.get('email')?.invalid">Email is required and must be a valid email.</div>
+  <div class="alert alert-danger" *ngIf="registrationForm.get('password')?.touched && registrationForm.get('password')?.invalid">Password is required.</div>
+  <div class="alert alert-danger" *ngIf="registrationForm.get('dni')?.touched && registrationForm.get('dni')?.invalid">DNI is required.</div>
+  <div class="alert alert-danger" *ngIf="registrationForm.get('date_of_birth')?.touched && registrationForm.get('date_of_birth')?.invalid">Date of Birth is required.</div>
+  <div class="alert alert-danger" *ngIf="registrationForm.get('role')?.touched && registrationForm.get('role')?.invalid">Role is required.</div>
 </form>
+
+</div>
