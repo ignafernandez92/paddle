@@ -1,4 +1,80 @@
-.warning-message {
-    color: red;
-    font-weight: bold;
-  }
+/* registration.component.css */
+
+.registration-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #232D3F;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.section-title {
+  color: #008170;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.player-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  
+}
+
+.createplayer-titles {
+  color: #008170;
+}
+
+/* Estilo para todos los inputs */
+input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  border: 1px solid #008170; 
+  border-radius: 4px;
+  background-color: #005B41;
+  color: #008170;
+}
+
+button {
+  background-color: #008170;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005B41;
+}
+
+.alert-danger {
+  color: #FF0000;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.table-title {
+  color: #008170;
+}
+
+.vertical-line {
+  cursor: pointer;
+}
+
+
+select {
+  background-color: #005B41;
+  color: #008170;
+}
+
+
+.center-title {
+  text-align: center;
+}
