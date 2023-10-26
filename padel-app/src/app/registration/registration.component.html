@@ -38,14 +38,6 @@
     <input type="date" id="date_of_birth" name="date_of_birth" formControlName="date_of_birth" required>
   </div>
 
-  <div class="form-group">
-    <label for="role" class="createplayer-titles">Role:</label>
-    <select id="role" name="role" formControlName="role" required>
-      <option value="player">Player</option>
-      <option value="club_admin">Club Admin</option>
-    </select>
-  </div>
-
   <button type="submit" class="btn btn-primary">Register</button>
 
   <div class="alert alert-danger" *ngIf="registrationStatus === 'success'">{{ registrationMessage }}</div>
@@ -58,7 +50,6 @@
   <div class="alert alert-danger" *ngIf="registrationForm.get('password')?.touched && registrationForm.get('password')?.invalid">Password is required.</div>
   <div class="alert alert-danger" *ngIf="registrationForm.get('dni')?.touched && registrationForm.get('dni')?.invalid">DNI is required.</div>
   <div class="alert alert-danger" *ngIf="registrationForm.get('date_of_birth')?.touched && registrationForm.get('date_of_birth')?.invalid">Date of Birth is required.</div>
-  <div class="alert alert-danger" *ngIf="registrationForm.get('role')?.touched && registrationForm.get('role')?.invalid">Role is required.</div>
 </form>
 
 </div>

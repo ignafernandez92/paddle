@@ -43,7 +43,18 @@ export class AuthService {
     console.log('AuthService - isAuthenticated');
     return false;
   }
-  // getUserID(): Observable<{ user_id: string }> {
-  //   return this.http.get<{ user_id: string }>('/api/get-user-id');
-  // }
+
+  getUserID(): string | null {
+    const user_id = localStorage.getItem('user_id');
+    console.log('User ID retrieved:', user_id);
+    return user_id;
+  }
+  setUserID(user_id: string): void {
+    localStorage.setItem('user_id', user_id);
+    console.log('User ID set:', user_id);
+
+  }
+  removeUserID(): void {
+    localStorage.removeItem('user_id');
+  }
 }

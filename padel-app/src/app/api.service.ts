@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environments';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Competitor } from 'app/shared/competitors.model';
 import { tap } from 'rxjs/operators';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +32,15 @@ export class ApiService {
         catchError((error: any) => {
           console.error('An error occurred:', error);
           throw error;
+        }),
+        map((response: any) => {
+          if (response && response.user_id) {
+            return response; // If user_id is present, return the entire response
+          } else {
+            // Handle the case where user_id is missing
+            console.error('User ID is missing in the login response.');
+            throw new Error('Invalid login response');
+          }
         })
       );
   }

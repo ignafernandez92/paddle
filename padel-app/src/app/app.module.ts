@@ -24,6 +24,8 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { MatIconModule } from '@angular/material/icon';
 import { NewTournamentComponent } from './new-tournament/new-tournament.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegistrationClubComponent } from './registration-club/registration-club.component';
+
 
 
 @NgModule({
@@ -44,6 +46,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CourtsComponent,
     PaginationComponent,
     NewTournamentComponent,
+    RegistrationClubComponent,
+
         
   ],
   imports: [

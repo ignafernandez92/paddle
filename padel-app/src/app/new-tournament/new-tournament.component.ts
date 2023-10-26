@@ -13,7 +13,7 @@ import { Tournament } from './tournament-model';
 export class NewTournamentComponent implements OnInit {
   errorMessage: string = '';
   tournamentForm: FormGroup;
-  user_id: number = 1; 
+  user_id: string | null = null;; 
 
   constructor(
     private authService: AuthService,
@@ -27,6 +27,8 @@ export class NewTournamentComponent implements OnInit {
       startDate: ['', Validators.required],
       endDate: ['', Validators.required]
     });
+    this.user_id = this.authService.getUserID();
+
   }
 
   onNavigate(feature: string) {

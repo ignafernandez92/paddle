@@ -17,12 +17,6 @@
   <label for="password">Password:</label>
   <input type="password" id="password" name="password" [(ngModel)]="password" required><br>
 
-  <label for="role">Role:</label>
-  <select id="role" name="role" [(ngModel)]="selectedRole" required>
-    <option value="player">Player</option>
-    <option value="club_admin">Club Admin</option>
-  </select><br>
-
   <button type="submit">Login</button>
   <p><a routerLink="/forgot-password">Forgot Password?</a></p>
 </form>

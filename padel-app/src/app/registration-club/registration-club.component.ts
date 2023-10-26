@@ -4,16 +4,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css'],
+  templateUrl: './registration-club.component.html',
+  styleUrls: ['./registration-club.component.css'],
 })
-export class RegistrationComponent implements OnInit {
-  registrationForm: FormGroup;
+export class RegistrationClubComponent implements OnInit {
+  registrationClubForm: FormGroup;
   registrationStatus: 'success' | 'error' | null = null;
   registrationMessage: string = '';
 
   constructor(private apiService: ApiService, private fb: FormBuilder) {
-    this.registrationForm = this.fb.group({
+    this.registrationClubForm = this.fb.group({
       f_name: ['', Validators.required],
       l_name: ['', Validators.required],
       username: ['', Validators.required],
@@ -21,24 +21,24 @@ export class RegistrationComponent implements OnInit {
       password: ['', Validators.required],
       dni: ['', Validators.required],
       date_of_birth: ['', Validators.required],
+      club_id: 1,
     });
   }
 
   ngOnInit(): void {}
 
   onSubmit(): void {
-    if (this.registrationForm.valid) {
-      // Create the user data object with "role" set to "player"
+    if (this.registrationClubForm.valid) {
       const userData = {
-        ...this.registrationForm.value,
-        role: 'player',
+        ...this.registrationClubForm.value,
+        role: 'club_admin',
       };
 
       this.apiService.registerUser(userData).subscribe({
         next: (response) => {
           this.registrationStatus = 'success';
           this.registrationMessage = 'User registered successfully!';
-          this.registrationForm.reset();
+          this.registrationClubForm.reset();
         },
         error: (error) => {
           this.registrationStatus = 'error';

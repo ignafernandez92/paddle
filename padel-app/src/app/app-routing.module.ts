@@ -11,6 +11,8 @@ import { TournamentComponent } from './Tournament/tournament.component';
 import { UserClubComponent } from './user-club/user-club.component';
 import { CourtsComponent } from './courts/courts.component';
 import { NewTournamentComponent } from './new-tournament/new-tournament.component';
+import { RegistrationClubComponent } from './registration-club/registration-club.component';
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -21,7 +23,8 @@ const routes: Routes = [
   { path: 'tournament', component: TournamentComponent},
   { path: 'user-club', component: UserClubComponent},
   { path: 'courts', component: CourtsComponent},
-  { path: 'new-tournament', component: NewTournamentComponent}]
+  { path: 'new-tournament', component: NewTournamentComponent},
+  { path: 'registration-club', component: RegistrationClubComponent}]
     @NgModule({
   imports: [RouterModule.forRoot(routes, { enableTracing: true, useHash:false })],
   exports: [RouterModule],
