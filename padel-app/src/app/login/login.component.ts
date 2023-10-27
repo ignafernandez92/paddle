@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
         this.authService.setToken(response.token);
         this.authService.setUserID(response.user_id);
         this.authService.getUserID();
+        this.authService.getClubID();
         if (response.role === 'player') {
           this.router.navigate(['/']);
         } else if (response.role === 'club_admin') {

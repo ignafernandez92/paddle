@@ -58,7 +58,25 @@ export class CourtsComponent implements OnInit {
   }
 
   getCourts() {
-    this.apiService.getCourts(1).subscribe(
+    // Get the club_id from AuthService
+    const clubIdString = this.authService.getClubID();
+    console.log('Club ID retrieved from AuthService:', clubIdString);
+
+  
+    if (!clubIdString) {
+      console.error('Club ID is not available. Cannot fetch courts.');
+      return;
+    }
+  
+    // Convert the clubIdString to a number
+    const clubId = Number(clubIdString);
+  
+    if (isNaN(clubId)) {
+      console.error('Invalid club ID. Cannot fetch courts.');
+      return;
+    }
+  
+    this.apiService.getCourts(clubId).subscribe(
       (response) => {
         this.courts$.next(response);
       },

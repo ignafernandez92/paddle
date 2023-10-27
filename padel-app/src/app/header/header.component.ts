@@ -24,6 +24,7 @@ export class HeaderComponent {
   logout() {
     this.authService.removeToken(); 
     this.authService.removeUserID();
+    this.authService.removeClubID();
     this.router.navigate(['/login']); 
   }
 }

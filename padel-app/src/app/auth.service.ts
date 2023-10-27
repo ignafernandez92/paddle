@@ -49,12 +49,34 @@ export class AuthService {
     console.log('User ID retrieved:', user_id);
     return user_id;
   }
-  setUserID(user_id: string): void {
-    localStorage.setItem('user_id', user_id);
-    console.log('User ID set:', user_id);
-
+  setUserID(user_id: any): void {
+    if (user_id && typeof user_id === 'string' && user_id.trim() !== '') {
+      localStorage.setItem('user_id', user_id);
+      console.log('User ID set:', user_id);
+    } else {
+      console.warn('Invalid user_id. User ID was not set.');
+    }
   }
-  removeUserID(): void {
+  
+    removeUserID(): void {
     localStorage.removeItem('user_id');
+  }
+
+  setClubID(club_id: string): void {
+    if (club_id && club_id.trim() !== '') {
+      localStorage.setItem('club_id', club_id);
+      console.log('Club ID set:', club_id);
+    } else {
+      console.warn('Invalid club_id. Club ID was not set.');
+    }
+  }
+  getClubID(): string | null {
+    const club_id = localStorage.getItem('club_id');
+    console.log('Club ID retrieved:', club_id);
+    return club_id;
+  }
+
+  removeClubID(): void {
+    localStorage.removeItem('club_id');
   }
 }
