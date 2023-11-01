@@ -42,18 +42,7 @@ app.use(passport.session());
 const tournamentRoutes = require('./routes/tournamentRoutes');
 const matchRoutes = require('./routes/matchRoutes');
 const playerRoutes = require('./routes/playerRoutes');
-const courtRoutes = require('./routes/courtRoutes');
-const RegisterRoutes = require('./routes/register');
-const login = require('./routes/login');
-const forgotPasswordRoutes = require('./routes/forgot-password');
-const user_id = require('./routes/user_id');
-const requireAuth = require('./passport-config');
 
-app.use('/login', login);
-app.use('/tournaments', tournamentRoutes);
-app.use('/matches', matchRoutes);
-app.use('/players', playerRoutes);
-app.use('/courts', courtRoutes);
 app.use('/register', RegisterRoutes);
 app.use('/password-reset', forgotPasswordRoutes);
 app.use('/api/get-user-id', user_id);

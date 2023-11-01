@@ -4,21 +4,23 @@ const router = express.Router();
 const connection = require('../db');
 require('dotenv').config();
 
-router.get('/', (req, res) => {
+router.get('/:clubId', (req, res) => {
   try {
-    const clubId = req.query.clubId;
-    connection.connect();
+    const club_id = req.params.clubId;
+    const query = `SELECT * FROM courts WHERE club_id = ?`;
+    
+    // No need to call connection.connect() here as it's typically done globally when setting up the database connection.
 
-    const query = `SELECT * FROM courts WHERE clubId = ?`;
-    connection.query(query, [clubId], (error, results) => {
+    connection.query(query, [club_id], (error, results) => {
       if (error) {
         res.status(400).json({ message: 'Error al obtener la lista de canchas', error });
       } else {
         res.status(200).json({ message: 'Lista de canchas', courts: results });
       }
-    });
 
-    connection.end();
+      // Close the connection after the query is complete.
+      connection.end();
+    });
   } catch (error) {
     res.status(400).json({ message: 'Error al obtener la lista de canchas', error });
   }
@@ -26,8 +28,10 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const courtId = req.params.id;
-
   const query = 'SELECT * FROM courts WHERE court_id = ?';
+  
+  // No need to call connection.connect() here as it's typically done globally when setting up the database connection.
+
   connection.query(query, courtId, (error, results) => {
     if (error) {
       console.error('Error al buscar la cancha:', error);
@@ -40,9 +44,10 @@ router.get('/:id', (req, res) => {
 
     const courtDetails = results[0];
     res.json({ court: courtDetails });
+
+    connection.end();
   });
 });
-
 // Ruta: POST /courts
 router.post('/', (req, res) => {
   const { club_id, court_number } = req.body;

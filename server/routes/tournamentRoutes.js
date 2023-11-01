@@ -61,7 +61,7 @@ router.post('/', (req, res) => {
             end_date: endDate,
             number_ofCourts: numberOfCourts,
             number_ofPairs: numberOfPairs,
-            user_id: user_id, // Use user_id instead of creator_id
+            user_id: user_id, 
           },
         });
       }
