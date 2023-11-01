@@ -28,7 +28,6 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit(): void {
     if (this.registrationForm.valid) {
-      // Create the user data object with "role" set to "player"
       const userData = {
         ...this.registrationForm.value,
         role: 'player',

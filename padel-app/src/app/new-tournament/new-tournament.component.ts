@@ -13,7 +13,7 @@ import { Tournament } from './tournament-model';
 export class NewTournamentComponent implements OnInit {
   errorMessage: string = '';
   tournamentForm: FormGroup;
-  user_id: string | null = null;; 
+  user_id: number | null = null;; 
 
   constructor(
     private authService: AuthService,

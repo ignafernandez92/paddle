@@ -44,15 +44,14 @@ export class AuthService {
     return false;
   }
 
-  getUserID(): string | null {
+  getUserID(): number | null {
     const user_id = localStorage.getItem('user_id');
-    console.log('User ID retrieved:', user_id);
-    return user_id;
+    return user_id ? +user_id : null; 
   }
-  setUserID(user_id: any): void {
-    if (user_id && typeof user_id === 'string' && user_id.trim() !== '') {
-      localStorage.setItem('user_id', user_id);
-      console.log('User ID set:', user_id);
+  
+  setUserID(user_id: number | null): void {
+    if (user_id !== null) {
+      localStorage.setItem('user_id', user_id.toString()); 
     } else {
       console.warn('Invalid user_id. User ID was not set.');
     }
@@ -62,21 +61,41 @@ export class AuthService {
     localStorage.removeItem('user_id');
   }
 
-  setClubID(club_id: string): void {
-    if (club_id && club_id.trim() !== '') {
-      localStorage.setItem('club_id', club_id);
-      console.log('Club ID set:', club_id);
+  setClubID(club_id: number | null): void {
+    if (club_id !== null && typeof club_id === 'number') {
+      localStorage.setItem('club_id', club_id.toString()); 
     } else {
       console.warn('Invalid club_id. Club ID was not set.');
     }
   }
-  getClubID(): string | null {
+
+  getClubID(): number | null {
     const club_id = localStorage.getItem('club_id');
-    console.log('Club ID retrieved:', club_id);
-    return club_id;
+    if (club_id !== null) {
+      return parseInt(club_id, 10); 
+    } else {
+      return null;
+    }
   }
 
   removeClubID(): void {
     localStorage.removeItem('club_id');
   }
+  getUserRole(): string | null {
+    const userRole = localStorage.getItem('user_role');
+    return userRole;
+  }
+  
+  setUserRole(userRole: string): void {
+    if (userRole && typeof userRole === 'string' && userRole.trim() !== '') {
+      localStorage.setItem('user_role', userRole);
+    } else {
+      console.warn('Invalid user_role. User role was not set.');
+    }
+  }
+  
+  removeUserRole(): void {
+    localStorage.removeItem('user_role');
+  }
+  
 }

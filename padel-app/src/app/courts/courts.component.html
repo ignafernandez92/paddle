@@ -16,20 +16,27 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let court of getCourtsForPage() | async; let i = index;">
-        <tr>
-          <td>{{ court.court_id }}</td>
-          <td>{{ court.court_number }}</td>
-          <!-- Add more columns here if needed -->
-        </tr>
+      <ng-container *ngIf="courts$ | async as courts; else loading">
+        <ng-container *ngFor="let court of getCourtsForPage(courts); let i = index;">
+          <tr>
+            <td>{{ court.court_id }}</td>
+            <td>{{ court.court_number }}</td>
+            <!-- Add more columns here if needed -->
+          </tr>
+        </ng-container>
       </ng-container>
     </tbody>
   </table>
 
   <app-pagination
-    [totalItems]="courts$.value.length"
+    [totalItems]="totalItems"
     [itemsPerPage]="itemsPerPage"
     [currentPage]="currentPage"
     (pageChange)="onPageChange($event)"
   ></app-pagination>
 </div>
+<ng-template #loading>
+  <tr>
+    <td colspan="2">Loading...</td>
+  </tr>
+</ng-template>

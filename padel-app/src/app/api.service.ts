@@ -45,13 +45,13 @@ export class ApiService {
       );
   }
  
-    getCourts(clubId: number): Observable<any> {
-      return this.http.get(`${this.baseUrlHttp}?clubId=${clubId}`);
-    }
+  getCourts(clubId: number): Observable<any> {
+    return this.http.get(`${this.baseUrlHttp}/courts/${clubId}`);
+  }
   
-    addCourt(courtData: any): Observable<any> {
-      return this.http.post(this.baseUrlHttp, courtData);
-    }
+  addCourt(courtData: any): Observable<any> {
+    return this.http.post(`${this.baseUrlHttp}/courts/`, courtData);
+  }
   
     updateCourt(courtId: number, courtData: any): Observable<any> {
       return this.http.put(`${this.baseUrlHttp}/${courtId}`, courtData);

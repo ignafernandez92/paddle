@@ -5,7 +5,6 @@ import { ApiService } from '../api.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-
 @Component({
   selector: 'app-courts',
   templateUrl: './courts.component.html',
@@ -25,7 +24,8 @@ export class CourtsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getCourts();  }
+    this.getCourts();
+  }
 
   onNavigate(feature: string) {
     console.log('onNavigate called with feature:', feature);
@@ -58,27 +58,16 @@ export class CourtsComponent implements OnInit {
   }
 
   getCourts() {
-    // Get the club_id from AuthService
-    const clubIdString = this.authService.getClubID();
-    console.log('Club ID retrieved from AuthService:', clubIdString);
+    const clubId = this.authService.getClubID();
 
-  
-    if (!clubIdString) {
+    if (!clubId) {
       console.error('Club ID is not available. Cannot fetch courts.');
       return;
     }
-  
-    // Convert the clubIdString to a number
-    const clubId = Number(clubIdString);
-  
-    if (isNaN(clubId)) {
-      console.error('Invalid club ID. Cannot fetch courts.');
-      return;
-    }
-  
+
     this.apiService.getCourts(clubId).subscribe(
       (response) => {
-        this.courts$.next(response);
+        this.courts$.next(response.courts); // Update to access the correct property
       },
       (error) => {
         console.error('Error fetching court data:', error);
@@ -87,21 +76,13 @@ export class CourtsComponent implements OnInit {
     );
   }
 
-  getCourtsForPage(): Observable<any[]> {
-    return this.courts$.pipe(
-      map((courts) => {
-        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-        return courts.slice(startIndex, startIndex + this.itemsPerPage);
-      })
-    );
+  getCourtsForPage(courts: any[]): any[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return courts.slice(startIndex, startIndex + this.itemsPerPage);
   }
 
   onPageChange(page: number) {
     this.currentPage = page;
-  }
-
-  get lastShownIndex(): number {
-    return (this.currentPage - 1) * this.itemsPerPage;
   }
 
   get totalItems(): number {
